@@ -1,0 +1,65 @@
+<apex:page controller="MSOProcess" showHeader="false" sidebar="false">
+    <style>
+        body {
+          
+         background-image: url("https://www.w3schools.com/cssref/img_flwr.gif"), url("https://www.w3schools.com/cssref/paper.gif");
+         background-position: right bottom, left top;
+         background-repeat: no-repeat, repeat;
+         padding: 15px;
+        }
+                
+            .rules_form1 * {
+               padding:5px;
+               background:url('https://www.w3schools.com/cssref/img_flwr.gif');
+           }
+      }
+      </style>
+    
+    <apex:Form >
+      <apex:pageBlock title="Account and Opportunity Information Page" tabStyle="Lead" >
+        <apex:pageBlockSection title="Account information" columns="1">
+            <apex:inputfield value="{!a1.Name}"/>
+            <apex:inputfield value="{!a1.OwnerId}"/>
+            <apex:inputField value="{!a1.RecordType.Name}" />
+            <apex:inputfield value="{!a1.Industry}"/>
+            <apex:inputfield value="{!a1.BillingCity}"/>
+            <apex:inputfield value="{!a1.BillingState}"/>
+            <apex:inputfield value="{!a1.BillingStreet}"/>
+            <apex:inputfield value="{!a1.BillingCountry}"/>
+            <apex:inputfield value="{!a1.BillingPostalCode}"/>
+            
+          
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Existing Opportunity information" columns="1" rendered="{! o1.Id != null}">
+            <apex:inputfield value="{!o1.Name}"/>
+            <apex:inputfield value="{!o1.AccountId}"/>
+            <apex:inputfield value="{!o1.OwnerId}"/>            
+            <apex:inputfield value="{!o1.StageName}"/>
+            <apex:inputfield value="{!o1.CloseDate}"/>
+            <apex:inputfield value="{!o1.Opportunity_Type__c}"/>
+        </apex:pageBlockSection>
+          
+          
+          <apex:pageBlockSection title="New Opportunity information" columns="1" rendered="{! o1.Id == null}">
+            <apex:inputfield value="{!nopp.Name}"/>
+            <apex:inputfield value="{!nopp.AccountId}"/>
+            <apex:inputfield value="{!nopp.OwnerId}"/>
+            <apex:inputfield value="{!nopp.StageName}"/>
+            <apex:inputfield value="{!nopp.CloseDate}"/>
+            <apex:inputfield value="{!nopp.Opportunity_Type__c}"/>
+        </apex:pageBlockSection>
+          
+        <apex:pageBlockSection title="Primary Competitor information" columns="1">
+            <apex:inputfield value="{!comp1.Competitors__c}"/>
+            <apex:inputfield value="{!comp1.Reason_why_we_Won_Lost__c}"/>
+            <apex:inputfield value="{!comp1.Won_Lost_Reason__c}"/>
+            <apex:inputfield value="{!comp1.Name}"/>
+        </apex:pageBlockSection>
+     
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton value="Move to Products selection page" action="{!productSelectionPage}" />
+          </apex:pageBlockButtons>
+          
+        </apex:pageBlock>
+    </apex:Form>
+</apex:page>

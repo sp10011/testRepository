@@ -1,0 +1,50 @@
+<aura:component controller="AccountController_Lightning" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:lightningQuickAction"
+                access="global"
+                >
+    <lightning:notificationsLibrary aura:id="notifLib"/>   
+    <aura:handler name="init" value="{!this}" action="{!c.accessDefaultvalue}"/>
+    <aura:attribute name="DefaultName" type="string" default="testing....."/>
+    <aura:attribute name="searchtext" type="string"/>
+    <aura:attribute name="UserDetails" type="AccountController_Lightning"/>
+    <!-- create 2 aura handler with waiting and donewaiting events--> 
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <!--create a component attributs -->
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="FieldError" type="string"/>
+
+   
+    <form>
+        
+        <div aura:id="sumit" class="slds-page-header" name="SumitPandeyTitle">
+            <div class="slds-media">
+                <div class="slds-media__figure">
+                      <lightning:icon iconName="standard:account" alternativeText="Indicates approval"/>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">Account and Opportunity Search</h1>
+                    <h2>{!v.UserDetails.userin.Name}</h2>
+                    <h2>{!v.UserDetails.userin.Email}</h2>
+                </div>
+            </div>
+        </div>
+        <fieldset class="slds-box">
+        <legend style="font-size: 1.00rem">Search Account</legend>
+       <lightning:input aura:id="AccId" label="Enter Account Name" name="SearchAccount" 
+                         value="{!v.searchtext}" placeholder="Search for an Account..."
+                         messageWhenValueMissing="Please Enter Account Name"
+                         required="true"
+                         onblur="{!c.noError}"
+                        /><br/>
+        <lightning:button label="Search"
+                           variant="brand"
+                         onclick="{!c.searchAccount}"/>
+        </fieldset>
+        
+        <aura:if isTrue="{!v.Spinner}">
+            <lightning:spinner class="spinnerClass" variant="brand" size="large"/>
+        </aura:if>
+    </form>
+	
+</aura:component>

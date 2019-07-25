@@ -1,0 +1,44 @@
+<apex:page standardController="Task" showHeader="false" sidebar="false" extensions="ViewAllActivities">
+    <apex:form >
+      <apex:pageBlock tabStyle="Lead" >
+        <apex:pageBlockTable value="{!wrap}" var="t">
+           
+            <apex:column headerValue="Due Date">
+                <apex:outputField value="{!t.tv.ActivityDate}"/>
+                 <apex:outputField value="{!t.ev.ActivityDate}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Assign To">
+                <apex:outputField value="{!t.tv.OwnerId}"/>
+                <apex:outputField value="{!t.ev.OwnerId}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Type">
+                <apex:outputField value="{!t.tv.Type}"/>
+                 <apex:outputField value="{!t.ev.Type}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Subject">
+                <apex:outputField value="{!t.tv.Subject}"/>
+                 <apex:outputField value="{!t.ev.Subject}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Name">
+                <apex:outputField value="{!t.tv.WhoID}"/>
+                 <apex:outputField value="{!t.ev.WhoID}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Comment">
+                <apex:outputField value="{!t.tv.Description}"/>
+                <apex:outputField value="{!t.ev.Description}"/>
+            </apex:column>
+            
+            <apex:column headervalue="From">
+                <apex:inputCheckbox value="{!t.b}" disabled="true"/>
+            </apex:column>
+            
+                        
+             </apex:pageBlockTable>
+     </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,12 @@
+<apex:page controller="Radiobutton">
+  <apex:form >
+      <apex:selectRadio value="{!name}" >
+          <apex:selectOption itemLabel="Hyderabad" itemValue="Srikanth" />
+          <apex:selectOption itemLabel="Delhi" itemValue="Sumit" />
+          <apex:selectOption itemLabel="Pune" itemValue="Prashanth" />
+          <apex:selectOption itemLabel="Chennai" itemValue="Priya" />
+        <apex:actionSupport event="onchange" action="{!show1}" />
+      </apex:selectRadio>
+      <apex:outputLabel value="{!name}"/>
+   </apex:form>
+</apex:page>

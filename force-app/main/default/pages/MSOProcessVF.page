@@ -1,0 +1,105 @@
+<apex:page controller="MSOProcess" showHeader="false" standardStylesheets="true">
+  <!-- <apex:image url="{!$Resource.MyPic}" width="100" height="200"  /> -->
+     <style>
+        body {
+          
+         background-image: url("https://www.w3schools.com/cssref/img_flwr.gif"), url("https://www.w3schools.com/cssref/paper.gif");
+         background-position: right bottom, left top;
+         background-repeat: no-repeat, repeat;
+         padding: 15px;
+        }
+                
+            .rules_form1 * {
+               padding:5px;
+               background:url('https://www.w3schools.com/cssref/img_flwr.gif');
+           }
+      }
+      </style>
+    
+    <script>
+         function account(th){
+            alert(th);
+            var a = document.getElementById(th).value;
+            alert(a);w
+         }
+    
+    </script>
+    
+    <apex:form >     
+          <apex:sectionHeader Subtitle="Manual Sales Order Process"/>
+              <apex:pageBlock title="Account Search" tabStyle="Account" >
+                    <apex:pageBlockSection title="Search on Account Name" >
+                          <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Account Name" />
+                                <apex:inputText value="{!searchName}" id="in1"/>
+                          </apex:pageBlockSectionItem>
+                       <apex:commandButton value="Search" action="{!searchAccount}" style="padding: 5px;" reRender="test,myform" />
+                        
+ <!----------------------------------------------HTML CODE----------------------------------------------------------------------------------------->
+                        <!--      <apex:outputPanel >
+                        <button type="button" style="cursor:pointer">
+                           <apex:actionsupport action="{!searchAccount}" rerender="test,myform" event="onclick">
+                                      Search
+                           </apex:actionsupport>
+                       </button>
+                     </apex:outputPanel>   --->
+ <!----------------------------------------------------------------------------------------------------------------------------------------------------->
+                        
+                        
+                    </apex:pageBlockSection>
+              </apex:pageBlock>
+                  
+<!-- Below Block is created for Account section on MSO Process page -->                  
+          <apex:pageBlock title="Accounts" id="test" tabStyle="Account">
+              <apex:pageMessages />
+                <apex:pageBlockSection title="Account Detail"  rendered="{!wr.size>0}" >
+                <apex:pageBlockTable value="{!wr}" var="a"> 
+                           
+               <apex:column headervalue="Action" width="2%" >
+                    <apex:inputCheckBox value="{!a.b1}">
+                       <apex:actionSupport event="onclick" action="{!updateTable}" reRender="test,myform" >
+                            <apex:param name="saccountId" value="{!a.accWr.Id}" assignTo="{!saccountId}"  /> 
+                       </apex:actionSupport>
+                    </apex:inputCheckBox>
+                </apex:column>
+                
+                      <apex:column value="{!a.accWr.Name}"/>
+                      <apex:column value="{!a.accWr.Industry}"/>
+                      <apex:column value="{!a.accWr.Email__c}"/>
+                      <apex:column headerValue="Total no. of Open opportunities" value="{!a.count}" />
+                    </apex:pageBlockTable>
+                  
+              </apex:pageBlockSection>
+           </apex:pageBlock>
+   
+<!-- Below Block is created for Opportunity section on MSO Process page -->
+        <apex:pageBlock title="Opportunities" tabStyle="Opportunity" id="myform">
+            <apex:pageMessages />
+                    <apex:pageBlockButtons >
+                        <apex:commandButton value="New Opportunity" rerender="myForm" immediate="true" action="{!newOpportunity_accnopp}" disabled="{wr.size==0}" />
+                    </apex:pageBlockButtons>
+            
+              <apex:pageBlockSection title="Opportunity Detail" rendered="{!oppList.size>0}">
+                                                       
+                  <apex:pageBlockTable value="{!oppList}" var="o" >
+                   
+                  <apex:column headerValue="Action">
+                                     <apex:selectRadio >
+                                         <apex:selectOption />
+                                         
+                                         <apex:actionSupport event="onclick" rerender="myForm" immediate="true" action="{!accnopp}">                                             
+                                             <apex:param name="na" assignTo="{!sopportunityId}" value="{!o.Id}"/>
+                                         </apex:actionSupport>
+                                     </apex:selectRadio>
+                  </apex:column>
+                          <apex:column value="{!o.Name}"/>
+                          <apex:column value="{!o.AccountId}"/>
+                          <apex:column value="{!o.StageName}"/>
+                          <apex:column value="{!o.CloseDate}"/>
+                </apex:pageBlockTable>
+              </apex:pageBlockSection>
+          </apex:pageBlock>
+        
+        
+    </apex:form>
+</apex:page>

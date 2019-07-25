@@ -1,0 +1,83 @@
+<apex:page controller="MSOProcess" showHeader="false" sidebar="false" >
+    <style>
+        body {
+          
+         background-image: url("https://www.w3schools.com/cssref/img_flwr.gif"), url("https://www.w3schools.com/cssref/paper.gif");
+         background-position: right bottom, left top;
+         background-repeat: no-repeat, repeat;
+         padding: 15px;
+        }
+                
+            .rules_form1 * {
+               padding:5px;
+               background:url('https://www.w3schools.com/cssref/img_flwr.gif');
+           }
+      }
+      </style>
+    
+       <apex:Form >
+        <apex:pageBlock tabStyle="Lead">
+            <apex:pageBlockSection columns="1" rendered="{!o1.Id != null}">
+                <apex:outputField Value="{!a1.Name}"/> 
+                <apex:outputField value="{!o1.Name}" />
+                <apex:outputField value="{!o1.StageName}"/>
+                <apex:outputField value="{!o1.OwnerId}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="1" rendered="{!nopp.Id != null}">
+                <apex:outputField Value="{!a1.Name}"/> 
+                <apex:outputField value="{!nopp1.Name}"/>
+                <apex:outputField value="{!nopp1.StageName}"/>
+                <apex:outputField value="{!nopp1.OwnerId}"/>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+        
+        <apex:pageBlock tabStyle="Lead">
+            <apex:PageBlockSection >
+                Notes: <br/>
+                •If an existing Opportunity was selected and the stage of that opportunity is other than Closed Won/Closed Lost, then the Stage will get change to Closed Won.<br/>
+            </apex:PageBlockSection>
+        </apex:pageBlock>
+                  
+           <apex:pageBlock >
+          <apex:pageBlockTable value="{!wr}" var="w" id="wtable" >
+                                       
+              <apex:column headervalue="Quantity">
+                  <apex:inputField value="{!w.op1.Quantity}"/>
+              </apex:column>
+                  
+              <apex:column headervalue="Sales Price">
+              	  <apex:inputField value="{!w.op1.UnitPrice}"/>
+              </apex:column>
+
+              <apex:column headervalue="Product">
+                  <apex:inputField value="{!w.pri1.Product2Id}"/> 
+              </apex:column>
+              
+              <apex:column headervalue="List Price">
+                  <apex:inputField value="{!w.pri1.UnitPrice}"/>
+              </apex:column>
+              
+              <apex:column headerValue="Delete Product">
+                 <apex:commandButton value="Delete" action="{!deleteRows}" rerender="wtable" >
+                    <apex:param name="rNumber" value="{!w.rowNumber}" assignTo="{!rNumber}"/> 
+                 </apex:commandButton>
+              </apex:column>
+              
+           <apex:column headerValue="Row number" value="{!w.rowNumber}"/>
+              
+              
+           </apex:pageBlockTable>
+           </apex:pageBlock>
+           
+           <apex:commandButton value="Add Row" action="{!addRows}" rerender="wtable" immediate="true"/>
+              <apex:param name="addCount" value="1" assignTo="{!addCount}"/> 
+       
+           
+           <apex:commandButton value="Click to Add Products on Opportunity" action="{!updateProductsonOpportunity}" rerender="wtable"/>
+                <apex:param name="addCount" value="1" assignTo="{!addCount}"/>
+       
+           
+    </apex:Form>
+</apex:page>

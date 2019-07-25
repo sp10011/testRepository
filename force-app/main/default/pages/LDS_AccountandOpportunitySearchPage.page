@@ -1,0 +1,375 @@
+<apex:page id="LDSPage" showHeader="false" standardStylesheets="false" docType="html-5.0" sidebar="false" applyHtmlTag="false" applyBodyTag="false" controller="MSOProcess">
+ 
+ <!-- <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">    -->
+ 
+<head>
+      <meta charset="utf-8" />
+      <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+      <title>Manual Sales Order Process</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+      <apex:includeScript value="{!$Resource.sfdcjquery}"/>
+      <!--<apex:stylesheet value="{!URLFOR($Resource.LighteningDesign, 'assets/styles/salesforce-lightning-design-system.vf-min.css')}" />-->
+      <apex:slds />
+   
+</head> 
+      <body>   
+  
+<!--Style-->
+          <style>
+              
+            @media only screen and (min-width: 900px)  {
+            #page{
+                width:80% !important;
+                margin-left:auto;
+                margin-right:auto;
+               }
+             }  
+          </style>
+<!---->
+
+<!--Scripting-->          
+   <script src="../../soap/ajax/34.0/connection.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var accOppArrObj = null;
+         function myjavascript(){
+            $('.isShown').show();
+           }
+       
+       
+          function toastbanner(){
+           var status1 = document.getElementById('listvalue');
+           var a = document.getElementById('fortoastBanner');
+           if (a.style.display === 'none') {
+                    a.style.display = 'block';
+                } 
+               else {
+                a.style.display = 'none';
+               }
+         }
+         
+          
+          function fetchaccountandOpportunity(){
+              var searchname = document.getElementById('searchId').value;
+              Visualforce.remoting.Manager.invokeAction(
+                  '{!$RemoteAction.MSOProcess.accOpp}',
+                      searchname,
+                      function(result,event){
+                        if(event.status){
+                            var returned_result = JSON.parse(JSON.stringify(result));
+                            //console.log('my returned result is :'+JSON.stringify(returned_result));
+                            var accMapArr = []; 
+                            var accOppArr = [];
+                            for(var count=0; count<=returned_result.length-1; count++){
+                                var tempObj = returned_result[count];
+                                if (tempObj.hasOwnProperty("accwraplist")){
+                                    //console.info(" -> ", tempObj);
+                                    accMapArr.push(tempObj);
+                                }
+                                else if(tempObj.hasOwnProperty("accOpp")){
+                                    accOppArr.push(tempObj);
+                                    accOppArrObj = accOppArr;
+                                }
+                            } 
+                            
+                            var accountObject = [];
+                            var i =0;
+                            for(var count=0; count<=accMapArr[i].accwraplist.length-1; count++){
+                                accountObject.push(accMapArr[i].accwraplist[count]);
+                            }
+                            var htn = document.getElementsByClassName("loopid")[0];
+                            htn.innerHTML = '';
+                            for(var co=0; co<=accountObject.length-1; co++){
+                                 htn.innerHTML += '<tr class="slds-hint-parent">' +
+                                                   '<td role="gridcell" tabindex="0" class="slds-text-align_left">' +
+                                                  '<div class="slds-checkbox_add-button">' +
+                                                  '<input type="checkbox" class="slds-assistive-text" id="'+accountObject[co].Id+'" tabindex="-1" oncomplete="abc()"; onclick="myjavascript();fetchOpportunity(this.id);">'+
+                                                   '<label for="'+accountObject[co].Id+'"class="slds-checkbox_faux">'+
+                                                   '<span class="slds-assistive-text"/>' +
+                                                   '</label>'+
+                                                   
+                                                   '</div>'+ 
+                                                   '</td>'+
+                                                  '<td role="gridcell">' +
+                                                  '<div title="Industry">' +
+                                                  '<span class="outputlabel">' + accountObject[co].Name +'</span>' +
+                                                  '</div>' +
+                                                  '</td>' +
+                                                  '<td role="gridcell">' +
+                                                  '<div title="Industry">' +
+                                                  '<span class="outputlabel">' + accountObject[co].Industry +'</span>' +
+                                                  '</div>' +
+                                                  '</td>' +
+                                                  '<td role="gridcell">' +
+                                                  '<div title="Address">' +
+                                                  '<span class="outputlabel">' +accountObject[co].BillingStreet + ',' +accountObject[co].BillingState + ',<br/>' +accountObject[co].BillingCity + ',' +accountObject[co].BillingPostalCode+ ',<br/>' +accountObject[co].BillingCountry+  '</span>' +
+                                                  '</div>' +
+                                                  '</td>' +
+                                                  
+                                                  '<td role="gridcell">' +
+                                                  '<div title="Record Type">' +
+                                                  '<span class="outputlabel">' + accountObject[co].RecordType.Name +'</span>' +
+                                                  '</div>' +
+                                                  '</td>' +
+                                                  
+                                                  '<td role="gridcell">' +
+                                                  '<div title="Owner">' +
+                                                  '<span class="outputlabel">'+ accountObject[co].Owner.Name +'</span>' +
+                                                  '</div>' +
+                                                  '</td>' +
+                                      
+                                                  '</tr>';
+                                         }
+                                    }
+                                },
+                                 {escape:true}
+                          );
+                   }
+          
+          function fetchOpportunity(accountId){
+              var opp_selected_Acc = [];
+              var isnull = accOppArrObj[0].accOpp[accountId];
+              if(isnull != undefined){
+              for(var count=0;count<=accOppArrObj[0].accOpp[accountId].length-1; count++){
+                  opp_selected_Acc.push(accOppArrObj[0].accOpp[accountId][count]);
+              }
+              
+              var opphtm = document.getElementsByClassName("Opportunitylopp")[0];
+              opphtm.innerHTML = '';    
+              for(var count=0; count<=opp_selected_Acc.length-1; count++){
+                 opphtm.innerHTML += '<tr class="slds-hint-parent">' +
+                                     '<td class="slds-text-align_left">'+
+                                     '<div class="slds-checkbox_add-button">'+
+                                     '<input type="Checkbox" class="slds-assistive-text" id="'+count+'" tabindex="-1"/>' +
+                                     '<Label for="'+count+'" Class="slds-checkbox_faux">' +
+                                     '<span class="slds-assistive-text"></span>' +
+                                     '</Label>'+
+                                     '</div>' +
+                                     '</td>' +
+                                     
+                                     '<td scope="row">'+
+                                     '<div title="Opportunity Name">' +
+                                     '<span >'+ opp_selected_Acc[count].Name +'</span>'+
+                                     '</div>'+
+                                     '</td>' +
+                                     
+                                     '<td role="gridcell">'+
+                                     '<div title="Opportunity Type">'+
+                                     '<span class="outputField">'+ opp_selected_Acc[count].Opportunity_Type__c +'</span>'+  
+                                     '</div>'+
+                                     '</td>'+
+                                     
+                                     '<td role="gridcell">'+
+                                     '<div title="StageName">'+
+                                     '<span class="outputField">'+ opp_selected_Acc[count].StageName +'</span>'+  
+                                      '</div>'+
+                                     '</td>'+
+                                     
+                                     '<td role="gridcell">'+
+                                     '<div title="CloseDate">'+
+                                     '<span class="outputField">'+ opp_selected_Acc[count].CloseDate +'</span>'+  
+                                     '</div>'+
+                                     '</td>'+
+                                     
+                                     '<td role="gridcell">'+
+                                     '<div title="Owner">'+
+                                    '<span class="outputField">'+ opp_selected_Acc[count].Owner.Name +'</span>'+  
+                                     '</div>'+
+                                     '</td>'+
+                                     '</tr>';
+                            }
+                          }
+                     }
+                       
+             function abc(){   
+              $('#isShown').hide();
+            }
+          
+       </script>     
+<!---->    
+      <body id="bodyId">
+          <apex:form >
+       <div class="slds-scope" id="page">
+          <!--Page Header--> 
+           <div class="slds-page-header">
+              <div class="slds-media">
+                <div class="slds-media__figure"/>
+                 <div class="slds-media__body">
+                     <span class="slds-icon_container slds-icon-standard-opportunity" title="Account Icon">
+                         <apex:image url="{!URLFOR($Resource.LighteningDesign,'/assets/icons/standard/account_120.png')}" styleclass="slds-icon slds-icon-standard-account"/>
+                     </span>
+                     <span class="slds-icon_container slds-icon-standard-opportunity" title="Account Icon">
+                         <apex:image url="{!URLFOR($Resource.LighteningDesign,'/assets/icons/standard/opportunity_120.png')}" styleclass="slds-icon slds-icon-standard-opportunity"/>
+                     </span>
+                     <apex:outputPanel >
+                         <h6  title="Rohde Corp - 80,000 Widgets">Account and Opportunity Search Page</h6>
+                     </apex:outputPanel>
+                     
+                  </div>
+                      <div class="slds-text-align_right" style="display:flex;">
+                       <span class="slds-avatar slds-avatar_medium">
+                           <apex:image url="{!URLFOR($Resource.LighteningDesign,'/assets/images/avatar2.jpg')}" title="User avatar"/>
+                       </span>
+                         <h6 class="slds-page-header__title slds-truncate slds-align-middle">{!currentuser}</h6>
+                      </div>
+              </div>          
+            </div>
+               
+
+<!--Spinner-->              
+    
+        <div id="isShown" class="slds-spinner_container slds-is-fixed" style="display:none;z-index:999999" >
+        
+           <div role="status" class="slds-spinner slds-spinner_brand slds-spinner_medium">
+             <span class="slds-assistive-text">Loading</span>
+              <div class="slds-spinner__dot-a"></div>
+             <div class="slds-spinner__dot-b"></div>
+           </div>
+        </div>
+    
+<!--Error/Warning-->
+<apex:outputPanel id="header">
+   <div Id="fortoastBanner" class="slds-notify_container slds-is-relative" style="display:none;">
+    <div class="slds-notify slds-notify_toast slds-theme_error" role="alert" style="min-width:20rem;padding-right:1rem;padding-left:1rem;">
+      <span class="slds-assistive-text">error</span>
+       <span class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed"> 
+        <span class="slds-icon slds-icon_small" aria-hidden="true">
+            <apex:image style="height:20px;" url="{!URLFOR($Resource.LighteningDesign,'/assets/icons/utility/error_60.png')}"/>
+        </span>
+       </span>
+      <div class="slds-notify__content">
+        <h5 class="slds-text-heading_small "> There is no Account with Name {!searchName} </h5>
+      </div> 
+      <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" style="position:static;" title="Close" onclick="toastbanner();">
+         <span class="slds-icon slds-icon_small" aria-hidden="true">
+           <apex:image style="height:20px;" url="{!URLFor($Resource.LighteningDesign,'/assets/icons/utility/close_60.png')}"/>
+         </span>
+        <span class="slds-assistive-text">Close</span>
+      </button>
+    </div>
+  </div>
+</apex:outputPanel>
+              
+<!---->
+<!---->
+              
+
+         
+      <fieldset class="slds-form-element slds-box slds-theme--default">
+         <legend class="slds-form-element__legend " style="font-size: 1.00rem">Account Search</legend>
+          <div class="slds-form-element__control">
+              <apex:outputLabel value="Company Name"/>&nbsp;&nbsp;
+              <!--<apex:inputText value="{!searchName}" id="searchId"/>&nbsp;&nbsp;-->
+              <input type='text' id="searchId" value="{!searchName}"/>&nbsp;&nbsp;
+              <apex:commandbutton styleclass="slds-button slds-button_brand" onclick="$('.isShown').show();myjavascript();fetchaccountandOpportunity();" value="Search"  reRender="myform" oncomplete="$('.isShown').hide();myjavascript();"/>
+          </div>
+      </fieldset>
+        
+<!-- Account-->
+    <apex:outputPanel >
+     <!--<apex:outputPanel rendered="{!accList.size>0}">-->
+      <fieldset class="slds-form-element slds-box slds-theme--default">
+        <legend class="slds-form-element__legend " style="font-size: 1.00rem">Accounts</legend>
+             <apex:outputpanel layout="block" styleclass="slds-scrollable slds-grow  slds-is-relative">
+                <table role="grid" class="slds-table slds-table_bordered table1" >
+                   <thead> 
+                 <tr>
+                  <th scope="col">
+                      <strong><apex:outputLabel value="Add"/></strong>
+                  </th>
+                  <th scope="col">
+                      <strong><apex:outputLabel value="Acount Name"/></strong>
+                  </th>
+                   <th scope="col">
+                       <strong><apex:outputLabel value="Industry"/></strong>
+                  </th>
+                   <th scope="col">
+                       <strong><apex:outputLabel value="Address"/></strong>
+                  </th>
+                     
+                  <th scope="col">
+                      <strong><apex:outputLabel value="Record Type"/></strong>
+                  </th>
+                   <th scope="col">
+                       <strong><apex:outputLabel value="Owner"/></strong>
+                  </th>
+                  
+                </tr>
+                </thead>
+                 
+                   <tbody class="loopid">
+                    
+                   </tbody>   
+                  
+                  
+                   </table>
+                 </apex:outputpanel>
+         </fieldset>
+  <!--</apex:outputPanel> -->
+      </apex:outputPanel>
+              
+              
+<!--Opportunity-->
+        <apex:outputPanel id="myform">
+         <apex:outputPanel >
+          
+           <fieldset class="slds-form-element slds-box slds-theme--default" >
+              <legend class="slds-form-element__legend " style="font-size: 1.00rem">Opportunity</legend>
+               <center style="padding-bottom:inherit;"><apex:commandButton value="New Opportunity" action="{!newOpportunity_accnopp}" immediate="true" styleclass="slds-button slds-button_brand"/></center>
+             <apex:outputpanel layout="block" styleclass="slds-scrollable slds-grow  slds-is-relative" >
+                <table role="grid" class="slds-table slds-table_bordered table1" >
+                 <thead> 
+                 <tr>
+                  <th scope="col">
+                      <apex:outputLabel value="Add"/>
+                  </th>
+                  <th scope="col">
+                      <apex:outputLabel value="Opportunity Name"/>
+                  </th>
+                   <th scope="col">
+                      <apex:outputLabel value="Opportunity Type"/>
+                  </th>
+                     
+                  <th scope="col">
+                      <apex:outputLabel value="StageName"/>
+                  </th>
+                     
+                  <th scope="col">
+                      <apex:outputLabel value="CloseDate"/>
+                  </th>
+                 
+                   <th scope="col">
+                      <apex:outputLabel value="Owner"/>
+                  </th>
+                </tr>
+                </thead>
+              
+                    <tbody class="Opportunitylopp">
+                 
+                
+                     </tbody>
+                   </table>
+                 </apex:outputpanel>
+               <center style="padding-top:inherit;"><apex:commandButton value="New Opportunity" action="{!newOpportunity_accnopp}" immediate="true" styleclass="slds-button slds-button_brand"/></center>
+         </fieldset>
+      </apex:outputPanel> 
+    </apex:outputPanel>
+
+<!--->
+          
+              <!-- FOOTER -->
+            <footer role="contentinfo" class="slds-p-around--large">
+              <!-- LAYOUT GRID -->
+              <div class="slds-grid slds-grid--align-spread">
+                <p class="slds-col">Manual Sales Order Process - Salesforce Lightning Design</p>
+                <p class="slds-col">COPYRIGHT &copy; 2017 ADP, LLC</p>
+              </div>
+              <!-- / LAYOUT GRID -->
+            </footer>
+            <!-- / FOOTER -->   
+<!---->
+          
+        </div>
+          </apex:form>
+          </body>
+    </body>
+</apex:page>

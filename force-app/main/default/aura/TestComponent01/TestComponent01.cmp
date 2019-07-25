@@ -1,0 +1,20 @@
+<aura:component controller="JSON2Apex">
+    <aura:handler name="init" value="this" action="{!c.getData}"/>
+    <aura:handler name="change" value="{!v.myText}" action="{!c.myValue}"/>
+    <aura:attribute name="MyName" type="String" default="No Name"/>
+    <aura:attribute name="myAccount" type="Array[]"/>
+    
+    <lightning:input
+                     aura:id="enter-search"
+                     name="enter-search"
+                     label="Search when user hits the 'enter' key"
+                     value="{!v.myText}"
+                     type="search"
+                     />
+    
+    <aura:iteration items="{!v.myAccount}" var="acc">
+        {!acc.Name}<br/>
+    </aura:iteration>
+    
+    <lightning:button label="TestButton" onclick="{!c.clickButton}"/>   
+</aura:component>

@@ -1,0 +1,77 @@
+<apex:page controller="ApplicationForm" showHeader="True" sidebar="True" >
+    <apex:sectionHeader description="Application Form" />
+    <apex:Form id="myForm">
+        <apex:pageBlock tabStyle="Opportunity" >
+            <apex:pageBlockButtons location="Top">
+              <apex:commandButton value="Detail" action="{!detail}" />
+              <apex:commandButton value="Search" action="{!searchAccount}" />
+            </apex:pageBlockButtons>
+                  <apex:pageBlockSection >
+                      <apex:PageBlockSectionItem labelStyle="width:40%" >
+                         <apex:outputLabel value="Please Enter Contact Person Name: " />
+                         <apex:inputText value="{!searchNamed}"/>
+                      </apex:PageBlockSectionItem>
+                  </apex:pageBlockSection>
+               <apex:pageBlockSection title="Merchant Detail" columns="2" collapsible="True">
+                   
+                   <apex:inputField value="{!a2.Name}"/>
+                   <apex:inputField value="{!a2.Business_Registration_No__c}"/>
+                   <apex:inputField value="{!a2.Contact_Person_Name__c}"/>
+                    <apex:inputField value="{!a2.Date__c}"/>
+                   <apex:inputField value="{!a2.Date_of_Establishment_Birth__c}" />
+                   <apex:inputField value="{!a2.Doing_Business_As_Brand_Name__c}"/>
+                   <apex:inputField value="{!a2.Email_Id__c}"/>
+                   <apex:inputField value="{!a2.Father_s_Name_Individual_Case__c}"/>
+                   <apex:inputField value="{!a2.IFSC__c}"/>
+                   <apex:inputField value="{!a2.Landline__c}"/>
+                   <apex:inputField value="{!a2.Legal_Entity_Name__c}"/>
+                   <apex:inputField value="{!a2.Merchant_Type_Individual_Partnership_Soc__c}"/>
+                   <apex:inputField value="{!a2.Mobile_Number__c}"/>
+                   <apex:inputField value="{!a2.Mobile_Number_for_notifications_Email_ID__c}"/>
+                   <apex:inputField value="{!a2.Name_s_of_Sole_Proprietor_Partners__c}"/>
+                   <apex:inputField value="{!a2.Operating_Address__c}"/>
+                   <apex:inputField value="{!a2.PAN__c}"/>
+                   <apex:inputField value="{!a2.Place__c}"/>
+                   <apex:inputField value="{!a2.Products_Services_Sold__c}"/>
+                   <apex:inputField value="{!a2.Registered_Address__c}"/>
+                   <apex:inputField value="{!a2.Website_URL__c}"/>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Bank Account Details:" columns="2" collapsible="True">  
+                
+                   <apex:inputField value="{!a2.Account_Name__c}" />
+                   <apex:inputField value="{!a2.Bank_Name__c}"/>
+                   <apex:inputField value="{!a2.Account_Number__c}"/>
+                   <apex:inputField value="{!a2.Branch_Address__c}"/>
+                   <apex:inputField value="{!a2.Branch_Name__c}"/>
+               
+            </apex:pageBlockSection>
+            
+           <apex:pageBlockSection title="Total {!countaccList}  Records are found" collapsible="True" > 
+                                
+              <apex:pageBlockTable value="{!accList1}" var="a">
+                 
+                 
+                  <apex:column >
+                                     <apex:selectRadio >
+                                         <apex:selectOption />
+                                         
+                                         <apex:actionSupport event="onclick" rerender="myForm" immediate="true" action="{!detail}">                                             
+                                             <apex:param name="na" assignTo="{!passId}" value="{!a.Id}"/>
+                                         </apex:actionSupport>
+                                     </apex:selectRadio>
+                  </apex:column>
+                 
+                    <apex:column value="{!a.Contact_Person_Name__c}" /> 
+                    <apex:column value="{!a.Name}"/>
+                    <apex:column value="{!a.Account_Name__c}"/>
+                    <apex:column value="{!a.Bank_Name__c}"/>
+                    <apex:column value="{!a.Account_Number__c}"/>
+                    <apex:column value="{!a.Branch_Address__c}"/>
+                  
+                         
+               </apex:pageBlockTable>
+           </apex:pageBlockSection>
+        </apex:pageBlock>
+  </apex:Form>
+</apex:page>

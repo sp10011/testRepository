@@ -1,0 +1,4 @@
+<apex:page >
+    <apex:slds />
+    <button class="slds-button slds-button_brand">Button Brand</button>
+</apex:page>

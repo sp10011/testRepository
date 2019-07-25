@@ -1,0 +1,3 @@
+<apex:page controller="MSOProcess" action="{!emailSerive}">
+   <h1>Send Sales Order Mail</h1>
+</apex:page>

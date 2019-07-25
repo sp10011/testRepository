@@ -1,0 +1,44 @@
+<apex:page standardController="Opportunity" showHeader="false" sidebar="false" extensions="QuickClose">
+  <apex:sectionHeader title="Quick Close Wizard"/>
+   <apex:tabPanel switchType="client" selectedTab="name2" id="theTabPanel" width="100%"> 
+     <apex:tab label="Opportunity Information" name="name1" id="tabOne" >
+     <apex:form >
+ <!-------------------------------------------------------Opportunity Section----------------------------------------------------------------------->
+      <apex:pageBlock title="{!opp.Name}" tabStyle="Account" >
+         <apex:pageBlockSection title="Opportunity Details" columns="2">
+               <apex:pageblocksection >
+                    <apex:inputField value="{!opp.StageName}"/> 
+                    <apex:inputField value="{!opp.CloseDate}"/>
+               </apex:pageblocksection>
+       </apex:pageBlockSection>
+     
+<!-------------------------------------------------------Competitor Section----------------------------------------------------------------------->         
+      <apex:pageBlockSection title="Competitor Details" columns="2">
+               <apex:pageblocksection >
+                  
+                       <apex:inputField value="{!comp.Competitors__c}"/>
+                       <apex:inputField value="{!comp.Name}"/>
+                       <apex:inputField value="{!comp.Won_Lost_Reason__c}"/> 
+                       <apex:inputField value="{!comp.Reason_why_we_Won_Lost__c}"/>
+                       <apex:inputField value="{!comp.Primary__c}"/> 
+             
+               </apex:pageblocksection>
+       </apex:pageBlockSection>
+          
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton value="Save" action="{!CloseOpp}"/>
+          </apex:pageBlockButtons>
+     </apex:pageBlock>
+   </apex:form>
+   </apex:tab>
+     
+     <apex:tab label="Notes and Attachements" >
+         <apex:form />
+     </apex:tab>
+     
+     <apex:tab label="Account" >
+         <apex:form />
+     </apex:tab>
+     
+ </apex:tabPanel>
+ </apex:page>

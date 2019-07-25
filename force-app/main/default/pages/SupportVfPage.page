@@ -1,0 +1,59 @@
+<apex:page sidebar="false" showHeader="false">
+    
+    <html>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+            
+            .navbar {
+            width: 100%;
+            background-color: #555;
+            overflow: auto;
+            }
+            
+            .navbar a {
+            float: left;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+            }
+            
+            .navbar a:hover {
+            background-color: #000;
+            }
+            
+            .active {
+            background-color: #4CAF50;
+            }
+            
+            @media screen and (max-width: 500px) {
+            .navbar a {
+            float: none;
+            display: block;
+            }
+            }
+        </style>
+        <body>
+            
+             <div class="navbar">
+                <table style="width:100%">
+                    <tr>
+                        <th><a  class="" href="#"><i class="fa fa-fw fa-home"></i> Home</a> </th>
+                        <th><a  href="#"><i ></i> RCSA</a></th>
+                        <th style="text-align: center;"><a style="float:none !important;" href="#"><i ></i>Experience Rise Assessment</a></th>
+                        <th><a href="#"><i ></i> Reports</a></th>
+                        <th><a  style="float: right;" href="#"><i ></i> Heading</a></th>
+                    </tr>
+                </table>
+             </div>
+            
+            <div style="background-color: teal; float: none; text-align: center; padding: 1%; overflow: none;" class="navbar">
+                <a  style="float: none;" href="#"><strong>RCSA</strong></a>
+            </div>
+            
+        </body>
+    </html> 
+    
+</apex:page>

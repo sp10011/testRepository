@@ -1,0 +1,45 @@
+<apex:page standardController="SPOT__c" extensions="SPOT"  readOnly="True" >
+     <apex:message />
+    <apex:form >
+        <apex:pageBlock tabStyle="Account"  >
+            
+            <apex:pageBlockButtons location="Top">
+                   <apex:commandButton value="Click to see Accounts" action="{!generateAccList}" />
+                   <apex:commandButton value="Generate Executive Summary report" action="{!executivereport}" />
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockTable value="{!wrList}" var="a" rendered="{!wrList.size != null}" id="test">
+                <apex:column headervalue="Action" width="2%" >
+                    <apex:inputCheckBox value="{!a.isSel}">
+                       <apex:actionSupport event="onclick" action="{!updateTable}" reRender="test" >
+                            <apex:param name="SelectedID" value="{!a.wrapAcc.Id}" assignTo="{!SelectedID}"  /> 
+                       </apex:actionSupport>
+                    </apex:inputCheckBox>
+                </apex:column> 
+ 
+                <apex:column headerValue="Account Name" width="30%">
+                    <apex:outputField value="{!a.wrapAcc.Name}"/>
+                </apex:column>
+                
+       <!--         <apex:column headerValue="Account Owner">
+                    <apex:outputField value = "{!a.wrapAcc.OwnerId}"/> 
+                </apex:column> 
+                
+                <apex:column headerValue="Industry">
+                    <apex:outputField value = "{!a.wrapAcc.Industry}"/> 
+                </apex:column>  -->
+                
+                <apex:column headerValue="Account RecordType" width="30%" >
+                    <apex:outputField value="{!a.wrapAcc.RecordTypeId}"/> 
+                </apex:column> 
+                
+             <!--   <apex:column headerValue="Email">
+                    <apex:outputField value = "{!a.Email__c}"/> 
+                   </apex:column>   -->	
+                
+                
+            </apex:pageBlockTable>
+                            
+        </apex:pageBlock>
+    </apex:form>
+  </apex:page>

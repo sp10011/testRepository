@@ -1,0 +1,84 @@
+<apex:page controller="MSOProcess" showHeader="false" sidebar="false">
+ <style>
+        body {
+          
+         background-image: url("https://www.w3schools.com/cssref/img_flwr.gif"), url("https://www.w3schools.com/cssref/paper.gif");
+         background-position: right bottom, left top;
+         background-repeat: no-repeat, repeat;
+         padding: 15px;
+        }
+                
+            .rules_form1 * {
+               padding:5px;
+               background:url('https://www.w3schools.com/cssref/img_flwr.gif');
+           }
+      }
+      </style>
+    
+    <apex:Form >
+            
+        <apex:pageBlock tabStyle="Opportunity">
+            <apex:pageBlockSection >
+                Please do the following:<br/>
+                1. Set Start Date for each Products.<br/>
+                2. Add Attachment to each Sale Order.<br/>
+                3. Save the Sale Order.
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:PageBlock tabStyle="Opportunity" >
+            <apex:pageBlockSection title="All Products on {!o1.name}" collapsible="false" rendered="{!sopportunityId != null && sopportunityId != ''}">
+                    <apex:pageBlockTable value="{!ExisopliList}" var="p" >
+                   	
+                    <apex:column value="{!p.Product2Id}" />
+                    <apex:column value="{!p.ProductCode}"/>	
+                    <apex:column headerValue="Start Date" >
+                      <apex:inputField value="{!p.Start_Date__c}"/>
+                    </apex:column>
+                        
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+           
+            
+      <apex:pageBlockSection title="All Products on {!nopp1.name}" collapsible="false" rendered="{!sopportunityId == null && nopp1.Id != null}" >
+                 
+                    <apex:pageBlockTable value="{!opliList}" var="po" >
+                    
+                    <apex:column value="{!po.Product2Id}"/>
+                    <apex:column value="{!po.ProductCode}"/>	
+                    <apex:column headerValue="Start Date" >
+                      <apex:inputField value="{!po.Start_Date__c}"/>
+                    </apex:column>
+                        
+                </apex:pageBlockTable>
+            </apex:pageBlockSection> 
+            
+                <apex:pageBlockButtons >
+                    <apex:commandButton value="Click to Create Sales Order" action="{!CreateSalesOrder}"/>
+                </apex:pageBlockButtons>
+        </apex:PageBlock>
+        
+   <!-------------------------------------------------- Attachment Section  ------------------------------------------------------------>     
+        <apex:pageBlock title="Please add Attachments to the Opportunity">
+              <apex:pageBlockButtons >
+                  <apex:commandButton value="upload" action="{!upload}"/>
+              </apex:pageBlockButtons>
+             <apex:pageBlockSection >
+                   <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="File Name" />
+                      <apex:inputText value="{!at.name}" id="fileName"/>
+                   </apex:pageBlockSectionItem>
+        
+                   <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="File"/>
+                      <apex:inputFile value="{!at.body}"/>
+                   </apex:pageBlockSectionItem>
+        
+                  <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="Description" />
+                      <apex:inputTextarea value="{!at.description}"/>
+                  </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:Form>
+</apex:page>

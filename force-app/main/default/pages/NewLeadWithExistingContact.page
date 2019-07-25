@@ -1,0 +1,33 @@
+<apex:page showHeader="false" sidebar="true" Controller="SalesInternalReferral" >
+    <apex:sectionHeader title="Internal lead Referral form Page"  />
+      <apex:Form >
+          <apex:pageBlock tabStyle="Lead">
+              
+              <apex:pageBlockButtons >
+                  <apex:commandButton value="Submit" action="{!save1}"/>
+                  <apex:commandbutton value="Cancel" action="{!cancel1}"/>
+                  <apex:commandbutton value="Back" action="{!back1}"/>
+              </apex:pageBlockButtons>
+              
+              <apex:pageBlockSection columns="1" >
+                  
+                              <apex:inputField value="{!vfl.FirstName}" /> 
+                              <apex:inputField value="{!vfl.LastName}"/> 
+                              <apex:inputField value="{!vfl.Company}"/> 
+                              <apex:inputfield value="{!vfl.NumberOfEmployees}"/>
+                              <apex:inputField value="{!vfl.Industry}"/> 
+                              <apex:inputField value="{!vfl.Email}"/> 
+                              <apex:inputField value="{!vfl.LeadSource}"/> 
+                              <apex:inputField value="{!vfl.Status}"/> 
+                              <apex:inputField value="{!vfl.Product__c}" /> 
+                              <apex:inputField value="{!vfl.City}"/> 
+                              <apex:inputField value="{!vfl.State}" /> 
+                              <apex:inputField value="{!vfl.Street}" /> 
+                              <apex:inputField value="{!vfl.Country}"/> 
+                              <apex:inputField value="{!vfl.PostalCode}" /> 
+                              <apex:inputField value="{!vfl.Custom_Routing__c}"/>
+   
+              </apex:pageBlockSection>
+          </apex:pageBlock>
+    </apex:Form>
+</apex:page>

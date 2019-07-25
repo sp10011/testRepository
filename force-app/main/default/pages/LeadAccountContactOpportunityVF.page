@@ -1,0 +1,74 @@
+<apex:page controller="LeadAccountContactOpportunity">
+    <apex:Form >
+        <apex:pageBlock title="Name Search page" tabStyle="Lead"> 
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Search" action="{!Search}"/>
+            </apex:pageBlockButtons>
+                <apex:pageBlockSection columns="1">
+                    <apex:pageBlockSectionitem >
+                       <apex:outputLabel value="Enter Name" /> 
+                       <apex:inputText value="{!name}"/> 
+                    </apex:pageBlockSectionitem>
+                </apex:pageBlockSection>
+            <apex:pageBlockSection title="Total {!countacc} Account Records are found" collapsible="True"> 
+                <apex:pageBlockTable title="Account Result" value="{!acc}" var="a">
+                    <apex:column value="{!a.Id}" width="1500%" />
+                    <apex:column value="{!a.Name}" width="1500%" />
+                    <apex:column value="{!a.RecordTypeId}" width="1500%" />
+                    <apex:column value="{!a.Industry}" width="1500%" />
+                    <apex:column value="{!a.Phone}" width="1500%" />
+                    <apex:column value="{!a.SLA__c}" width="1500%" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Total {!countcont} Contact Records are found" collapsible="True">  
+                <apex:pageBlockTable value="{!cont}" var="c">
+                    <apex:column value="{!c.Id}" width="1500%" />
+                    <apex:column value="{!c.AccountID}" width="1500%" />
+                    <apex:column value="{!c.Name}" width="1500%" />
+                    <apex:column value="{!c.RecordTypeId}" width="1500%" />
+                    <apex:column value="{!c.Phone}" width="1500%" />
+                    
+                    <apex:column value="{!c.Email}"/>
+                 </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+			<apex:pageBlockSection title="Total {!countld} Lead Records are found" collapsible="True" > 
+               <apex:pageBlockTable value="{!ld}" var="l">
+                    <apex:column value="{!l.Id}" width="1500%" />
+                    <apex:column value="{!l.Name}" width="1500%" />
+                    <apex:column value="{!l.Company}" width="1500%" />
+                    <apex:column value="{!l.LeadSource}" width="1500%" />
+                    <apex:column value="{!l.Status}" width="1500%" />
+                    <apex:column value="{!l.Phone}" width="1500%" />
+              </apex:pageBlockTable>
+            </apex:pageBlockSection>    
+            
+            <apex:pageBlockSection title="Total {!countopp} Opportunity Records are found" collapsible="True"> 
+                <apex:pageBlockTable value="{!opp}" var="o">
+                    <apex:column value="{!o.Id}" width="1500%" />
+                    <apex:column value="{!o.Name}" width="1500%" />
+                    <apex:column value="{!o.AccountID}" width="1500%" />
+                    <apex:column value="{!o.CloseDate}" width="1500%" />
+                    <apex:column value="{!o.StageName}" width="1500%" />
+                    <apex:column value="{!o.Type}" width="1500%" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+            
+             <apex:pageBlockSection title="Total {!countapp} Application Forms are found" collapsible="True"> 
+                <apex:pageBlockTable value="{!app}" var="ap">
+                    <apex:column value="{!ap.Id}" width="1500%" />
+                    <apex:column value="{!ap.Name}" width="1500%" />
+                    <apex:column value="{!ap.Contact_Person_Name__c}" width="1500%" />
+                    <apex:column value="{!ap.Account_Name__c}" width="1500%" />
+                    <apex:column value="{!ap.Account_Number__c}" width="1500%" />
+                    <apex:column value="{!ap.Bank_Name__c}" width="1500%" />
+                    <apex:column value="{!ap.Branch_Address__c}" width="1500%" />
+                    <apex:column value="{!ap.Branch_Name__c}" width="1500%" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+    </apex:Form>
+</apex:page>

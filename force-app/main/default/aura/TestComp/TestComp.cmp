@@ -1,0 +1,36 @@
+<aura:component >
+    
+    <div class="slds-box">
+        <lightning:layout horizontalAlign="spread">
+            <lightning:layoutItem>
+                <lightning:buttonMenu variant="bare" menuAlignment="left" iconName="utility:down" iconSize="large">
+                    <lightning:menuItem label="Test1"></lightning:menuItem>
+                    <lightning:menuItem label="Menu Item1"></lightning:menuItem>
+                    <lightning:menuItem label="Item32"></lightning:menuItem>
+                    <lightning:menuItem label="Item234"></lightning:menuItem>
+                    <lightning:menuItem label="Item52"></lightning:menuItem>
+                    <lightning:menuItem label="Item65"></lightning:menuItem>
+                </lightning:buttonMenu>
+                <lightning:button label="Nearby Contacts"></lightning:button>
+            </lightning:layoutItem>
+            <lightning:layoutItem>
+                <lightning:button class="slds-theme_neutral" iconPosition="right" variant="neutral" label="Create New"></lightning:button>
+                <lightning:buttonMenu variant="border" menuAlignment="right" iconName="utility:down" iconSize="medium">
+                    <lightning:menuItem label="Menu Item4"></lightning:menuItem>
+                    <lightning:menuItem label="Menu Item5"></lightning:menuItem>
+                    <lightning:menuItem label="Item1"></lightning:menuItem>
+                    <lightning:menuItem label="Item2"></lightning:menuItem>
+                    <lightning:menuItem label="Item3"></lightning:menuItem>
+                </lightning:buttonMenu>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <div>
+            <lightning:layout horizontalAlign="spread">
+                <lightning:layoutItem></lightning:layoutItem>
+                <lightning:layoutItem></lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </div>
+    <!--<lightning:buttonIcon alternativeText="" iconClass="" variant="bare" type="button" iconName="" size="large"></lightning:buttonIcon>-->
+	
+</aura:component>

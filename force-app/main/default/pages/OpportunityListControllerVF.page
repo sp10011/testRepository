@@ -1,0 +1,38 @@
+<apex:page controller="OpportunityListController" tabstyle="Opportunity">
+    <apex:form >
+        <apex:pageBlock >
+          <apex:pageBlockTable value="{!wr}" var="w" id="wtable" >
+                                       
+              <apex:column headervalue="Quantity">
+                  <apex:inputField value="{!w.o1.Quantity}"/>
+              </apex:column>
+                  
+              <apex:column headervalue="Sales Price">
+              	  <apex:inputField value="{!w.o1.UnitPrice}"/>
+              </apex:column>
+                  
+              <apex:column headervalue="Price Book" >
+                  <apex:inputField value="{!w.pri1.Pricebook2Id}"/> 
+              </apex:column>
+              
+              <apex:column headervalue="Product">
+                      <apex:inputField value="{!w.pri1.Product2Id}"/> 
+              </apex:column>
+              
+              <apex:column headervalue="List Price">
+                  <apex:inputField value="{!w.pri1.UnitPrice}"/>
+              </apex:column>
+              
+            </apex:pageBlockTable>
+      
+      <apex:commandButton value="Add Row" action="{!addRows}" rerender="wtable">
+         <apex:param name="addCount" value="1" assignTo="{!addCount}"/> 
+      </apex:commandButton>
+            
+      <apex:commandButton value="Save" action="{!savePro}" rerender="wtable">
+         <apex:param name="addCount" value="1" assignTo="{!addCount}"/> 
+      </apex:commandButton>
+          
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

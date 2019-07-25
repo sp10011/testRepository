@@ -1,0 +1,42 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+
+	<aura:attribute name="account" type="Object" 
+	  description="The record object to be displayed"/>
+	<aura:attribute name="accountRecord" type="Object" 
+	  description="A simplified view record object to be displayed"/>
+	<aura:attribute name="recordError" type="String" 
+	  description="An error message bound to force:recordData"/>
+
+	<force:recordData aura:id="record"
+		layoutType="FULL"
+		recordId='0013600000GZ7NIAA1'
+		targetError="{!v.recordError}"
+		targetRecord="{!v.account}"
+		targetFields="{!v.accountRecord}"
+    fields="Name, Industry" 
+		mode="EDIT"/>
+	
+    <div class="slds-box">
+        <div class="slds-text-heading_medium">
+            Load Account - Data Service
+        </div>
+     
+         <!-- Display a header with details about the record -->
+        <div class="slds-form--stacked slds-tile">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label"  >Name: </label>
+                <div class="slds-form-element__control">
+                  <ui:outputText class="slds-input" 
+                    value="{!v.accountRecord.Name}" />
+                </div>
+            </div> 
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" >Company Email : </label>
+                <div class="slds-form-element__control">
+                  <ui:outputTextArea class="slds-input"  
+                    value="{!v.accountRecord.Industry}"  />
+                </div>
+            </div> 
+        </div> 
+    </div>
+</aura:component>

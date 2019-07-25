@@ -1,0 +1,33 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" doctype="html-5.0" >
+  <apex:form styleClass="style1">
+    <style>
+       .style1{
+            font-weight: normal;
+            font-size: .9em;
+            background-color: White;
+            
+        }
+    </style>
+      <button type = "button" onclick = "show()"> Click Here </button>
+      
+<div>
+    
+   
+      <h1 style="text-align: center;background-color:rgb(90,90,90);color:White;" title="Quick Close Wizard for Majors">Quick Close Wizard</h1>
+      <hr/>
+    <p>This is a paragraph</p>
+      <hr/>
+      <a href="https://www.salesforce.com">
+          Please Click here to Go to Salesforce Page.
+      </a>
+      <hr/>
+</div>
+      <img src="296984.jpg" width="220" height="277" alt="Can not be displayed as you dint saved this Pic in your system"/>
+ </apex:form>  
+    
+    <script>
+           function show(){
+           alert("Please click on ok button");
+           }
+    </script>
+</apex:page>

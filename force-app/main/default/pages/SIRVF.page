@@ -1,0 +1,104 @@
+<apex:page showHeader="Fasle" sidebar="Fasle" controller="SalesInternalReferral">
+   
+    <apex:Form id="test">
+           <apex:pageBlock >  
+               <apex:pageMessages />
+   
+    <style>
+        .footer-docs p {
+            font-weight: normal;
+            font-size: .9em;
+            text-align: center;
+        }
+        #popupBasicErrorEmailOrPhone p {
+            font-weight: bold;
+            color:red;
+        }
+        #popupBasicErrorNameAndCompany P {
+            font-weight: bold;
+            color:red;
+        }
+        
+        .ui-loader-background {
+            width:100%;
+            height:100%;
+            top:0;
+            padding: 0;
+            margin: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display:none;
+            position: fixed;
+            z-index:100;
+        }
+        
+        .ui-loading .ui-loader-background {
+            display:block;
+        }
+        
+        body {  
+            margin: 0;
+        }
+        .ui-title {
+            background-attachment: scroll;
+             background-clip: border-box;
+             background-color: transparent;
+             
+             background-origin: padding-box;
+             background-position: 0px -2px;
+             background-repeat: no-repeat;
+             background-size: 50px auto;
+             padding-left: 65px !important;
+             display: inline;
+        }
+        
+        body, a, input, tr, td, select, option, h1, h2, h2, h3, h5, span {
+            font-family: 'proxima_nova_ltlight', Arial, sans-serif !important;
+        }
+                        
+    </style>
+
+               
+               <apex:pageBlockButtons location="bottom">
+                   <apex:commandButton value="Search" 
+                                        action="{!searchdetail}" reRender="test"/>
+                    <apex:commandButton value="Create a New Lead" 
+                                        action="{!newLead1}" reRender="test"/>
+               </apex:pageBlockButtons>
+               <!-- -->
+                <apex:pageBlockSection title="Enter Last Name AND Lead Source" 
+                                        columns="1" collapsible="Fasle" >
+                    <apex:inputText value="{!cont.LastName}" />
+                    <apex:inputField value="{!cont.LeadSource}"/>                                   
+                </apex:pageBlockSection>
+               
+                <apex:pageBlockSection title="Enter Phone Number OR Email Address"
+                                       columns="1" collapsible="Fasle">
+                    <apex:inputText value="{!cont.Phone}" />
+                    <apex:inputField value="{!cont.Email}"/>
+                </apex:pageBlockSection>
+               
+                <apex:pageBlockTable value="{!contList}" var="c" >    
+                    <apex:column >
+                        <apex:selectRadio >
+                            <apex:selectOption />
+                             <apex:actionSupport event="onclick" rerender="test" immediate="true" action="{!selectExsitingRecord}">
+                             <apex:param name="na" assignTo="{!passId}" value="{!c.Id}"/>
+                            </apex:actionSupport>
+                        </apex:selectRadio>
+                    </apex:column>
+                    
+                   <apex:actionStatus id="actStatusId" >
+                       <apex:facet name="start" >
+                         <img src="/img/loading.gif" />                    
+                      </apex:facet>
+                   </apex:actionStatus>
+                    
+                   <apex:column value="{!c.LastName}"/> 
+                   <apex:column value="{!c.AccountId}"/>
+                   <apex:column value="{!c.Phone}"/>
+                   <apex:column value="{!c.Email}"/>
+                   <apex:column value="{!c.LeadSource}"/>
+               </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:Form>
+</apex:page>

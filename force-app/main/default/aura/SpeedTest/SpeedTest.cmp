@@ -1,0 +1,6 @@
+<aura:component >
+    
+    <ltng:require scripts="{!$Resource.D3Chart}"
+                           afterScriptsLoaded="{!c.generatechartdata}"/>
+    <div id="chart"></div>
+</aura:component>

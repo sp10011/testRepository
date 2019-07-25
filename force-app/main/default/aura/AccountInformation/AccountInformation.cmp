@@ -1,0 +1,14 @@
+<aura:component >
+    <aura:attribute name="AccountInfo" type="list"/>
+    <aura:attribute name="AccountName" type="string"/>
+    
+    <form>
+        
+         <fieldset class="slds-box">
+          <legend style="font-size: 1.00rem">Account Information</legend>
+             <lightning:input aura:id="AccId" label="Test Label" name="AccountName" 
+                         value="{!v.AccountName}"/><br/>
+        </fieldset>
+        
+    </form>
+</aura:component>

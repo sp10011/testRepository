@@ -1,0 +1,21 @@
+<apex:page controller="sortDemoController">
+ <apex:form >
+  <apex:pageBlock >
+   <apex:panelgrid columns="2">
+    <apex:selectList value="{!selectedField }" size="1">
+     <apex:selectOption itemValue="Name" itemLabel="Account Name"/>
+     <apex:selectOption itemValue="AccountNumber" itemLabel="Account Number"/>
+     <apex:selectOption itemValue="Annualrevenue" itemLabel="Annual Revenue"/>
+    </apex:selectList>
+    <apex:commandButton value="Sort Table" action="{!sortMethod}" reRender="pgblcktbl"/>
+   </apex:panelgrid>
+  </apex:pageBlock>
+  <apex:pageBlock id="pgblcktbl">
+   <apex:pageblocktable value="{!accList}" var="rec" >
+     <apex:column value="{!rec.name}"/>
+     <apex:column value="{!rec.annualrevenue}"/>
+     <apex:column value="{!rec.accountnumber}"/>
+   </apex:pageblocktable>
+  </apex:pageBlock>
+ </apex:form>
+</apex:page>

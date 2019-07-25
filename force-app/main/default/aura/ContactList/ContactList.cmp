@@ -1,0 +1,18 @@
+<aura:component controller="lightningContact">
+    
+    <aura:attribute name="contacts" type="Contact[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    
+    <ul>
+        <aura:iteration items="{!v.contacts}" var="con">
+            <li>
+                <a href="{! '#/sObject/' + con.Id + '/view'}">
+                    <p>{!con.Name}</p>
+                    <p>{!con.Phone}</p>
+                </a>
+            </li> 
+        </aura:iteration>
+    </ul>
+	
+</aura:component>

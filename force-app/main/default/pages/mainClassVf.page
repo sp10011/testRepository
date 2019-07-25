@@ -1,0 +1,35 @@
+<apex:page controller="ManageListController" tabstyle="Account">
+ <apex:form >
+   <apex:pageBlock title="Bulk Account Create">
+      <apex:pageBlockTable value="{!wrappers}" var="wrapper" id="wtable">
+         <apex:column headerValue="Ident">
+            <apex:outputText value="{!wrapper.ident}"/>
+         </apex:column>
+         <apex:column headerValue="Name">
+            <apex:inputField value="{!wrapper.acc.Name}"/>
+         </apex:column>
+         <apex:column headerValue="Parent">
+            <apex:inputField value="{!wrapper.acc.ParentId}"/>
+         </apex:column>
+         <apex:column headerValue="Industry">
+            <apex:inputField value="{!wrapper.acc.Industry}"/>
+         </apex:column>
+         <apex:column headerValue="Type">
+            <apex:inputField value="{!wrapper.acc.Type}"/>
+         </apex:column>
+         <apex:column headerValue="Action">
+            <apex:commandButton value="Delete" action="{!delWrapper}" rerender="wtable">
+               <apex:param name="toDelIdent" value="{!wrapper.ident}" assignTo="{!toDelIdent}"/> 
+            </apex:commandButton>
+         </apex:column>
+      </apex:pageBlockTable>
+      <apex:commandButton value="Add Row" action="{!addRows}" rerender="wtable">
+         <apex:param name="addCount" value="1" assignTo="{!addCount}"/> 
+      </apex:commandButton>
+    <!--  <apex:commandButton value="Add 5 Rows" action="{!addRows}" rerender="wtable">
+         <apex:param name="addCount" value="5" assignTo="{!addCount}"/> 
+      </apex:commandButton>  -->
+      <apex:commandButton value="Save" action="{!save}"/>
+   </apex:pageBlock>
+ </apex:form>
+</apex:page>

@@ -1,0 +1,43 @@
+<apex:page Controller="PageReferenceExample" showHeader="True" sidebar="False" tabStyle="Account">
+    <apex:form >
+           <apex:pageBlock Title="Please Enter below details to create an Account">
+               <apex:pageBlockButtons location="bottom">
+                   <apex:commandButton value="Save" action="{!save}" />
+               </apex:pageBlockButtons>
+               
+
+               <apex:pageBlockSection title="Account">
+                        <apex:inputField value="{!acc.Name}" />
+                        <apex:inputField value="{!acc.Industry}"/>
+                        <apex:inputField value="{!acc.Phone}"/>
+                        <apex:inputField value="{!acc.SLA__c}"/>
+                        <apex:inputField value="{!acc.SLAExpirationDate__c}"/>
+                        <apex:inputField value="{!acc.SLASerialNumber__c}"/>
+                        <apex:inputField value="{!acc.Email__c}"/>
+                        <apex:inputField value="{!acc.OwnerId}"/>
+               </apex:pageBlockSection>
+               
+               <apex:pageBlockSection title="Contact">
+                        <apex:inputField value="{!cont.LastName}" />
+                        <apex:inputField value="{!cont.FirstName}"/>
+                        <apex:inputField value="{!cont.Email}"/>
+                        <apex:inputField value="{!cont.Phone}"/>
+               </apex:pageBlockSection>
+               
+               
+               <apex:pageBlockSection title="Opportunity">
+                        <apex:inputField value="{!opp.Name}" />
+                        <apex:inputField value="{!opp.StageName}"/>
+                        <apex:inputField value="{!opp.CloseDate}"/>
+               </apex:pageBlockSection>
+               
+               <apex:pageBlockSection title="Lead">
+                        <apex:inputField value="{!ld.LastName}" />
+                        <apex:inputField value="{!ld.FirstName}"/>
+                        <apex:inputField value="{!ld.Email}"/>
+                        <apex:inputField value="{!ld.Company}"/>
+               </apex:pageBlockSection>
+               
+            </apex:pageBlock>
+     </apex:form>
+</apex:page>

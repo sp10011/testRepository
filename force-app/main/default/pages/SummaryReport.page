@@ -1,0 +1,66 @@
+<apex:page standardController="SPOT__c" extensions="SPOT" sidebar="False" renderAs="pdf" showHeader="False" applyBodyTag="false" standardStylesheets="false">
+     <apex:Form >
+        <apex:pageBlock >
+   
+        <apex:pageBlockSection columns="1">
+            <apex:outputPanel style="font: 26px; color: #141452;font-family: 'Cambria(Headings)';border-bottom: solid;border-width: 1px; border-height: 100%;">
+               Executive Summary                                                  
+            </apex:outputPanel><br/>
+            
+            <apex:outputPanel style="font: 15px; font-weight: bold; color: #990000;font-family: 'Cambria(Headings)';">
+               {!acc.Name}
+            </apex:outputPanel> <br/>
+            
+            <apex:outputLabel value="Account Information:" style="font: 14px; font-weight: bold; font-family: 'Segoe UI';"/>
+              Name: {!acc.Name} <br/>
+              Link to Account: https://na27.salesforce.com/00130000009CUSq"<br/>
+                     
+            <br/><apex:outputLabel value="ADP Client Information:" style="font: 14px; font-weight: bold; font-family: 'Segoe UI';"/>
+              Type: <br/>
+              ADP Client Type: <br/>
+              ADP Client Of:<br/>
+              ADP Terminated Client Of:<br/>
+
+            <br/><apex:outputLabel value="ADP Relationship Managers:" style="font: 14px; font-weight: bold; font-family: 'Segoe UI';"/>
+            ADP Market Segment: <br/>
+            Lead DM Name: {!acc.owner.Name}<br/>
+            Lead DM Email: {!acc.owner.Email}<br/>
+            SE Name: <br/>
+            SE Email: <br/>
+            VP Name: <br/>
+            VP Email: <br/>
+            DVP Name: <br/>
+            DVP Email: <br/>
+            SVP Name: <br/>
+            SVP Email: <br/>
+
+            <br/><apex:outputLabel value="Opt Out Summary:" style="font: 14px; font-weight: bold; font-family: 'Segoe UI';"/>
+            Prior to the incident, all Contacts at the Account were opted in for all communication channels with ADP.  Following the incident, all Contacts related to the Account were opted out of all communication channels with ADP (including Email, Phone, Fax, and Postal mail).<br/>
+
+            <br/><apex:outputLabel value="ISDC Summary:" style="font: 14px; font-weight: bold; font-family: 'Segoe UI';"/>
+              There are no documented calls having been made via ISDC to the Account or its related Contacts in Salesforce.<br/>
+          
+            <br/><apex:outputLabel value="OnDemand Summary:" style="font: 14px; font-weight: bold; font-family: 'Segoe UI';"/>
+              There are no documented emails having been sent via OnDemand to the Account or its related Contacts in Salesforce.<br/>
+            
+        </apex:pageBlockSection> <br/>
+  
+ <!---------------------------------------------------------Account Team Member--------------------------------------------------------------------->           
+
+   <apex:outputLabel value="Account Team Summary:" style="font: 15px; font-weight: bold; font-family: 'Segoe UI';"/>
+   <apex:pageBlockTable value="{!atm}" var="at1" style="border: 1px solid Black;border-collapse: collapse;width: 60%;
+   height: 100px;text-align: Center;background-color:#778899;"> <!-- #778899-->
+  
+        <apex:column headerValue="Team Member" style="background-color: #A9A9A9;" > 
+            <apex:outputText value="{!at1.User.Name}"  />
+        </apex:column> 
+
+       <apex:column headervalue="Team Member Role" style="background-color: #A9A9A9;">
+            <apex:outputText value="{!at1.TeamMemberRole}"/>
+       </apex:column>
+        
+    </apex:pageBlockTable>
+            
+      </apex:pageBlock>
+    </apex:Form>
+</apex:page>

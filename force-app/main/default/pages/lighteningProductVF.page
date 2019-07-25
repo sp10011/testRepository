@@ -1,0 +1,185 @@
+<apex:page showHeader="false" sidebar="false" controller="MSOProcess">
+ <apex:form >   
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>Opportunity Quick Create</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  
+  <apex:stylesheet value="{!URLFOR($Resource.LighteningDesign, 'assets/styles/LighteningDesign.min.css')}" />
+  <apex:slds />
+     
+      <script type="text/javascript">
+    		function showhide(id) {
+       			var e = document.getElementById(id);
+       			e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+     		}
+     </script>
+    
+</head>
+    
+<!-------------------------------Page Header-------------------------------------------> 
+    
+    <div class="slds-page-header">
+   <div class="slds-media">
+     <div class="slds-media__figure">
+      <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+        <svg class="slds-icon" aria-hidden="true">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#opportunity"></use>
+        </svg>
+      </span>
+    </div>
+    <div class="slds-media__body">
+      <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">{!nopp1.Name}</h1>
+      <h3 class="slds-text-body_small slds-line-height_reset" >{!nopp1.StageName}</h3>
+    </div>
+  </div>
+ </div>
+
+    
+ <!--<button class="slds-button slds-button_brand" onclick="myFunction()" >Add Products</button> -->
+<apex:commandButton styleClass="slds-button slds-button_brand" value="Add Product" reRender="test1" onclick="javascript:showhide('uniquename')"/>
+<!-------------------------------Modal------------------------------------------------->
+<div id="uniquename" style="display:none;">
+ <apex:outputPanel >
+  <div class="demo-only" style="height: 640px;">
+  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-describedby="modal-content-id-1" class="slds-modal slds-slide-up-saving">
+    <div class="slds-modal__container" style="max-width:57rem;">
+        <header class="slds-modal__header" style="text-align:left;">
+            <div class="slds-grid slds-grow" id="modal-content-id-1">
+               <div class="slds-grid slds-grid_vertical">
+                <div class="slds-form-element">
+                  <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                   <div class="slds-combobox_container">
+                     <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+                             <apex:outputPanel >
+          						 <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Products"> Pricebook for MA </h1>
+       						 </apex:outputPanel> 
+                         </div>
+                       </div>
+                      </div>
+                    </div>
+                   </div>
+                </div>
+            </div>
+        </header>
+        
+         <header class="slds-modal__header" style="text-align:left;">
+           <div class="slds-grid slds-grow" id="modal-content-id-1">
+               <div class="slds-grid slds-grid_vertical">
+                <div class="slds-form-element">
+                  <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                   <div class="slds-combobox_container">
+                     <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right">
+                             <apex:outputPanel id="page2">
+          						 <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Products">  Products({!noOfRecords})  </h1>
+       						 </apex:outputPanel> 
+                          &nbsp; &nbsp;&nbsp; <!--<input type="text" class="slds-input slds-combobox__input" id="combobox-unique-id"   role="textbox" placeholder="Filter by Product Name or Family" style="width:20.75rem;" value="{!searchText}"/> -->
+                            <apex:inputText styleclass="slds-input slds-combobox__input" id="combobox-unique-id" style="width:15.75rem;" value="{!searchText}" html-placeholder="Filter by Product Name or Family"/>
+                            <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right" title="Description of icon when needed">
+                              <apex:image url="{!URLFOR($Resource.LighteningDesign,'/assets/icons/utility/search_60.png')}" /> 
+                            </span>
+                         </div>
+                       </div>
+                      </div>
+                     </div>
+                    </div>
+                
+                  </div>
+                  &nbsp;&nbsp;
+                  <apex:commandButton styleClass="slds-button slds-button--brand" action="{!search}" value="Search" reRender="page,page1,page2"/>
+                
+             </div>
+      </header>
+      <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+        <apex:outputPanel layout="block" styleclass="slds-scrollable slds-grow  slds-is-relative " id="page">
+                <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-border_right slds-border_left" role="grid" >
+                  <thead>
+                    <tr class="slds-text-title_caps">
+                     <th aria-label="Name"  scope="col">
+                          <span class="slds-truncate" title="Add">ADD</span>
+                          <span class="slds-assistive-text" aria-live="assertive" aria-atomic="true"></span>
+                     </th>  
+                     
+                       <th aria-label="Name"  scope="col">
+                          <span class="slds-assistive-text">Sort </span>
+                          <span class="slds-truncate" title="Product Name">PRODUCT CODE</span>
+                          <span class="slds-assistive-text" aria-live="assertive" aria-atomic="true"></span>
+                      </th>
+                        
+                      <th aria-label="Name"  scope="col">
+                          <span class="slds-assistive-text">Sort </span>
+                          <span class="slds-truncate" title="Product Name">PRODUCT NAME</span>
+                          <span class="slds-assistive-text" aria-live="assertive" aria-atomic="true"></span>
+                      </th>
+                        
+                                             
+                      <th aria-label="Name"  scope="col">
+                          <span class="slds-assistive-text">Sort </span>
+                          <span class="slds-truncate" title="Product Name">PRODUCT FAMILY</span>
+                          <span class="slds-assistive-text" aria-live="assertive" aria-atomic="true"></span>
+                      </th>
+                        
+                                                            
+                    </tr>
+                  </thead>
+              
+                 <tbody id="tableBody">
+                     <apex:repeat value="{!Contact}" var="w" >
+                         <tr class="slds-hint-parent">
+                          <td role="gridcell" tabindex="0" class="slds-text-align_right"  style="width:3.75rem;">
+                           <div class="slds-checkbox_add-button"> 
+                           <apex:inputCheckbox styleclass="slds-assistive-text" id="ss" tabindex="-1" html-data-id="{!w.pri1.Id}"  onclick="javascript:enableDisable(this.checked, '{!w.pri1.Id}-t1','{!w.pri1.Id}-t2');" value="{!w.checked}" />
+                            <apex:outputLabel for="ss" styleClass="slds-checkbox_faux">
+                             <span class="slds-assistive-text"></span>
+                            </apex:outputLabel>
+                           </div> 
+                          </td>
+                        
+                         <td scope="row" data-label="Product Family">
+                              <div class="slds-truncate" title="Product Family">{!w.pri1.ProductCode}</div>
+                         </td>
+                             
+                         <td scope="row">
+                              <div class="slds-truncate" title="Product Name">{!w.pri1.Name}</div>
+                         </td>
+                             
+                       
+                             
+                         <td scope="row" data-label="Product Family">
+                             <div class="slds-truncate" title="Product Family">{!w.pri1.Product2.Family}</div>
+                         </td>
+                                                 
+                      </tr> 
+                  </apex:repeat>
+                  </tbody>
+            </table>
+          </apex:outputPanel>
+      </div>
+      <footer class="slds-modal__footer slds-modal__footer_directional">
+    
+            <apex:outputPanel layout="block" id="x" styleclass="slds-text-align_center">
+              <apex:commandlink value="First"  styleclass="slds-float_left slds-p-right_x-small" action="{!Setcon.first}" rendered="{!Setcon.hasPrevious}"  reRender="page,x,buttonDiv" /> 
+              <apex:commandlink value="Previous"  styleclass="slds-float_left"  action="{!Setcon.previous}" rendered="{!Setcon.hasPrevious}"  reRender="page,x,buttonDiv" />
+              <apex:outputtext >{!pagenumber} of {!totalnoofpages}</apex:outputtext>
+              <apex:commandlink styleclass="slds-float_right slds-p-left_x-small" value="Last" action="{!Setcon.last}" rendered="{!Setcon.hasNext}" reRender="page,x,buttonDiv" /> 
+              <apex:commandlink styleclass="slds-float_right" value="Next" action="{!Setcon.next}" rendered="{!Setcon.hasNext}" reRender="page,x,buttonDiv" /> 
+              
+            </apex:outputPanel>
+    
+      </footer>	
+      </div>
+      <footer class="slds-modal__footer slds-modal__footer_directional">
+        <button class="slds-button slds-button_neutral">Cancel</button>
+        <button class="slds-button slds-button_brand">Save</button>
+      </footer>
+     </section>
+    </div>
+    
+    </apex:outputPanel>
+    </div>
+     </html>
+    </apex:form>
+</apex:page>

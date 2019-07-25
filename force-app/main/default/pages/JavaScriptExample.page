@@ -1,0 +1,23 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false">
+    
+    <head>
+   
+ <script>
+     function ab(){
+         alert("First Programm with Javascript");
+         document.getElementById("box").innerHTML="Sumit Pandey";
+         document.getElementById('box').removeAttribute('disabled');
+     }
+  </script>
+        
+    <body>
+          <label> Please Enter your Name </label>
+          <input type="text" id="box" oncomplete="ab()"  > </input> 
+    </body>
+        
+  
+   
+      
+       
+  </head>
+</apex:page>

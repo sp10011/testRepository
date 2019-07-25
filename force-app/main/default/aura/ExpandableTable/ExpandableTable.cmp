@@ -1,0 +1,130 @@
+<aura:component controller="AccountSearch" implements="flexipage:availableForAllPageTypes">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="isOpenInModal" type="boolean" default='false'/>
+    <aura:attribute name="AccountList" type="Account[]"/>
+    
+    
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:attribute name="modalPromise" type="Aura.Action"/>
+    
+    <div class="slds-float_left custom-box">Below Account List</div>
+    <a onclick="{!c.handleShowModal}"><lightning:icon class="slds-float_right" size="small" iconName="utility:expand"/></a>
+    
+    <aura:html tag="style">
+        .slds-modal__content{
+        overflow: auto !important;
+        overflow-y: auto !important;
+        }
+    </aura:html>
+    
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Opportunity Name">Account Name</div>
+                </th>
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Account Name">Phone</div>
+                </th>
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Close Date">Employees</div>
+                </th>
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Stage">Email</div>
+                </th>
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Confidence">Street</div>
+                </th>
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Amount">State</div>
+                </th>
+                <aura:if isTrue="{!v.isOpenInModal == true}">
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Contact">PostalCode</div>
+                </th>
+                <th class="slds-text-title_caps" scope="col">
+                    <div class="slds-truncate" title="Contact">Country</div>
+                </th>
+                
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Contact">City</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Contact">Created Id</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Contact">Created By</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Contact">LastModifiedById</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Contact">Record Type</div>
+                    </th>
+                    <aura:set attribute="else">
+                        <th class="slds-text-title_caps" scope="col">
+                            <div class="slds-truncate" title="Contact"><strong>....</strong></div>
+                        </th>
+                    </aura:set>
+                </aura:if>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <aura:iteration items="{!v.AccountList}" var="acc">  
+                <tr class="slds-hint-parent">
+                    <th data-label="Opportunity Name" scope="row">
+                        <div class="slds-truncate" title="Cloudhub"><a href="javascript:void(0);" tabindex="-1">{!acc.Name}</a></div>
+                    </th>
+                    <td data-label="Account Name">
+                        <div class="slds-truncate" title="Cloudhub">{!acc.Phone}</div>
+                    </td>
+                    <td data-label="Close Date">
+                        <div class="slds-truncate" title="4/14/2015">{!acc.NumberOfEmployees}</div>
+                    </td>
+                    <td data-label="Prospecting">
+                        <div class="slds-truncate" title="Prospecting">{!acc.Email__c}</div>
+                    </td>
+                    <td data-label="Confidence">
+                        <div class="slds-truncate" title="20%">{!acc.BillingStreet}</div>
+                    </td>
+                    <td data-label="Amount">
+                        <div class="slds-truncate" title="$25k">{!acc.BillingState}</div>
+                    </td>
+                     <aura:if isTrue="{!v.isOpenInModal == true}">
+                    <td data-label="Contact">
+                        <div class="slds-truncate" title="jrogers@cloudhub.com"><a href="javascript:void(0);" tabindex="-1">{!acc.BillingPostalCode}</a></div>
+                    </td>
+                    <td data-label="Amount">
+                        <div class="slds-truncate" title="$25k">{!acc.BillingCountry}</div>
+                    </td>
+                   
+                        <td data-label="Contact">
+                            <div class="slds-truncate" title="jrogers@cloudhub.com">{!acc.BillingCity}</div>
+                        </td>
+                        <td data-label="Contact">
+                            <div class="slds-truncate" title="jrogers@cloudhub.com">{!acc.CreatedDate}</div>
+                        </td>
+                        <td data-label="Contact">
+                            <div class="slds-truncate" title="jrogers@cloudhub.com">{!acc.CreatedById}</div>
+                        </td>
+                        <td data-label="Contact">
+                            <div class="slds-truncate" title="jrogers@cloudhub.com">{!acc.lastModifiedById}</div>
+                        </td>
+                        <td data-label="Contact">
+                            <div class="slds-truncate" title="jrogers@cloudhub.com">{!acc.RecordType.Name}</div>
+                        </td>
+                    </aura:if>
+                </tr>
+            </aura:iteration>
+            
+            
+        </tbody>
+    </table>
+    
+    
+    
+    
+    
+</aura:component>

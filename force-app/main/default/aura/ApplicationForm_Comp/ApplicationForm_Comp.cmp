@@ -1,0 +1,67 @@
+<aura:component access="global" controller="ApplicationFormController" implements="force:hasRecordId,flexipage:availableForAllPageTypes,force:appHostable,forceCommunity:availableForAllPageTypes">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInt}"/>
+    <aura:attribute name="picklistValues" type="list"/>
+    
+    <aura:attribute name="record" type="Object" 
+                    description="The record object to be displayed"/>
+    <aura:attribute name="simpleRecord" type="Object" 
+                    description="A simplified view record object to be displayed"/>
+    <aura:attribute name="recordError" type="String" 
+                    description="An error message bound to force:recordData"/>
+    <aura:attribute name="RequestOwner" type="string"/>
+    
+    <aura:attribute name="EmailAddr" type="string"/>
+    
+    <force:recordData aura:id="record"
+                      layoutType="FULL"
+                      recordId="{!v.recordId}"
+                      targetError="{!v.recordError}"
+                      targetRecord="{!v.record}"
+                      targetFields ="{!v.simpleRecord}"
+                      mode="EDIT"/>
+    
+    
+  
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade">
+            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Details</span>
+        </h3>
+        <div aria-hidden="false" class="slds-section__content">
+            <lightning:recordEditForm onload="{!c.showRequiredFields}" objectApiName="Application_Form__c">
+                <!-- the messages component is for error messages -->
+                <lightning:messages />
+                
+                
+                <lightning:layout>
+                    <lightning:layoutItem flexibility="auto" padding="around-small">
+                        <lightning:inputField aura:id="fieldId" fieldName="Name" />
+                        <lightning:inputField aura:id="fieldId" value="{!v.recordId}" fieldName="Account_Master_Detail__c" />
+                        <lightning:inputField disabled="{!v.simpleRecord.Email__c != null ? true : false}" aura:id="fieldId" value="{!v.simpleRecord.Email__c}" fieldName="Email_Id__c" />
+                        <!--lightning:input aura:id="fieldId" label="Email" value="{!v.simpleRecord.Email__c}" name="Email_Id__c"/>-->
+                        <lightning:inputField aura:id="fieldId" value="{!v.simpleRecord.Phone}" fieldName="Mobile_Number__c" />
+                        
+                      
+                        
+                       <!-- <div class="slds-form-element slds-has-error"> -->
+                            <lightning:inputField class="customRequired" aura:id="fieldId" fieldName="Place__c" />
+                            <div class="slds-form-element__help slds-hide" id="form-error-01">This field is required</div>
+                        
+                    </lightning:layoutItem>
+                    <lightning:layoutItem flexibility="auto" padding="around-small">
+                        
+                       
+                        <lightning:inputField class="" aura:id="fieldId" fieldName="Products_Services_Sold__c" />
+                        <lightning:inputField class="customRequired" aura:id="fieldId" fieldName="Registered_Address__c" />
+                    </lightning:layoutItem>
+                </lightning:layout>
+                <lightning:button aura:id="submit" label="Create Request" onclick="{!c.saveRecord}" variant="brand"  />
+                
+                
+            </lightning:recordEditForm>
+        </div>
+    </div>
+    
+    
+	
+</aura:component>

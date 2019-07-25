@@ -1,0 +1,130 @@
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0" sidebar="false" applyHtmlTag="false" applyBodyTag="false">
+ 
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>Salesforce Lightning Design System Trailhead Module</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <apex:stylesheet value="{!URLFOR($Resource.LighteningDesign,'assets/styles/salesforce-lightning-design-system.min.css')}"/>
+  <!-- Import the Design System style sheet -->
+    
+</head>
+
+
+  <!-- REQUIRED SLDS WRAPPER -->
+<body>
+    
+    
+    <apex:form >
+    <div class="LighteningDesign slds-scope">
+      <div class="slds-page-header">
+  <div class="slds-media">
+    <div class="slds-media__figure">
+      <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+        <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#opportunity" />
+        </svg>
+      </span>
+    </div>
+    <div class="slds-media__body">
+      <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">Rohde Corp - 80,000 Widgets</h1>
+      <p class="slds-text-body_small slds-line-height_reset">Mark Jaeckal • Unlimited Customer • 11/13/15</p>
+    </div>
+  </div>
+</div>
+
+ <div class="slds-path">
+<div class="slds-grid slds-path__track">
+<div class="slds-grid slds-path__scroller-container">
+<div class="slds-path__scroller" role="application">
+<div class="slds-path__scroller_inner">
+<ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
+<li class="slds-path__item slds-is-complete" role="presentation">
+<a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-1" role="option" tabindex="-1">
+<span class="slds-path__stage">
+<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+</svg>
+<span class="slds-assistive-text">Stage Complete</span>
+</span>
+<span class="slds-path__title">Contacted</span>
+</a>
+</li>
+<li class="slds-path__item slds-is-complete" role="presentation">
+<a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-2" role="option" tabindex="-1">
+<span class="slds-path__stage">
+<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+</svg>
+<span class="slds-assistive-text">Stage Complete</span>
+</span>
+<span class="slds-path__title">Open</span>
+</a>
+</li>
+<li class="slds-path__item slds-is-current slds-is-active" role="presentation">
+<a aria-selected="true" class="slds-path__link" href="javascript:void(0);" id="path-3" role="option" tabindex="0">
+<span class="slds-path__stage">
+<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+</svg>
+<span class="slds-assistive-text">Current Stage:</span>
+</span>
+<span class="slds-path__title">Unqualified</span>
+</a>
+</li>
+<li class="slds-path__item slds-is-incomplete" role="presentation">
+<a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-4" role="option" tabindex="-1">
+<span class="slds-path__stage">
+<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+</svg>
+</span>
+<span class="slds-path__title">Nurturing</span>
+</a>
+</li>
+<li class="slds-path__item slds-is-incomplete" role="presentation">
+<a aria-selected="false" class="slds-path__link" href="javascript:void(0);" id="path-5" role="option" tabindex="-1">
+<span class="slds-path__stage">
+<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+</svg>
+</span>
+<span class="slds-path__title">Closed</span>
+</a>
+</li>
+</ul>
+<div class="slds-path__scroll-controls">
+<button class="slds-button slds-button_icon slds-button_icon-border-filled" tabindex="-1" title="Scroll left">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#left" />
+</svg>
+<span class="slds-assistive-text">Scroll left</span>
+</button>
+<button class="slds-button slds-button_icon slds-button_icon-border-filled" tabindex="-1" title="Scroll right">
+<svg class="slds-button__icon" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#right" />
+</svg>
+<span class="slds-assistive-text">Scroll right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="slds-grid slds-path__action">
+<span class="slds-path__stage-name">Stage: Unqualified</span>
+<button class="slds-button slds-button_brand slds-path__mark-complete">
+<svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#check" />
+</svg>Mark Status as Complete</button>
+</div>
+</div>
+</div>
+      <!-- / SECTION - BADGE COMPONENTS -->
+    </div>
+    </apex:form>
+    </body>
+    
+    
+    <!-- / PRIMARY CONTENT WRAPPER -->
+</apex:page>

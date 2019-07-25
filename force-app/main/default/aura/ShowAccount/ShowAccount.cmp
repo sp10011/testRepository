@@ -1,0 +1,50 @@
+<aura:component controller="AccountController_Lightning"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:lightningQuickAction"
+                access="global"
+                >
+     <aura:handler event="c:PassAccountNameEvent" action="{!c.fetchAccount}"/>
+    <aura:attribute name="Account" type="List"/>
+    <!-- create 2 aura handler with waiting and donewaiting events--> 
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <!--create a component attributs -->
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+   
+    
+	<aura:if isTrue="{!v.Account.length>0}">
+    <fieldset class="slds-box">
+        <legend style="font-size: 1.00rem">Account Details</legend>
+        <br/><table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+        <thead>
+            <tr class="slds-text-heading--label">
+                <th scope="col"><div title="Action">Action</div></th>
+                <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>
+                <th scope="col"><div class="slds-truncate" title="Industry">Industry</div></th>
+                <th scope="col"><div class="slds-truncate" title="Number Of Employees">Number Of Employees</div></th>
+                <th scope="col"><div class="slds-truncate" title="Phone">Phone</div></th>
+                <th scope="col"><div class="slds-truncate" title="Account Owner">Account Owner</div></th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            
+            <!-- Use the Apex model and controller to fetch server side data -->
+            <aura:iteration items="{!v.Account}" var="acc">
+                <tr>
+                    <td><lightning:input type="checkbox-button" label="Action" aura:id="chkbtn" name="{!acc.Id}" onchange="{!c.fetchOpportunity}"/></td>
+                    <td><div class="slds-truncate" title="{!acc.Name}">{!acc.Name}</div></td>
+                    <td><div class="slds-truncate" title="{!acc.Industry}">{!acc.Industry}</div></td>
+                    <td><div class="slds-truncate" title="{!acc.NumberOfEmployees}">{!acc.NumberOfEmployees}</div></td>
+                    <td><div class="slds-truncate" title="{!acc.Phone}">{!acc.Phone}</div></td>
+                    <td><div class="slds-truncate" title="{!acc.Owner.Name}">{!acc.Owner.Name}</div></td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+    </fieldset>
+       
+    </aura:if>
+    <aura:if isTrue="{!v.Spinner}">
+        <lightning:spinner class="spinnerClass" variant="brand" size="large"/>
+    </aura:if>
+</aura:component>

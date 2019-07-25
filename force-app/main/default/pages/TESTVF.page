@@ -1,0 +1,21 @@
+<apex:page Controller="TESTVFClass">
+    <apex:Form >
+        
+        {!$CurrentPage.parameters.Type}
+        {!$CurrentPage.parameters.Name}
+        
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:inputField value="{!acc.Name}"/> 
+                <apex:inputField value="{!acc.Industry}"/> 
+                <apex:inputField value="{!acc.Phone}"/> 
+                <apex:inputField value="{!acc.Type}"/> 
+            </apex:pageBlockSection>
+          
+            <apex:pageBlockbuttons >
+                <apex:commandButton value="Save" action="{!save1}"/>
+            </apex:pageBlockbuttons>
+           
+         </apex:pageBlock> 
+    </apex:Form>
+</apex:page>

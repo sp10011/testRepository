@@ -1,0 +1,12 @@
+<!--component-->
+<aura:component >
+	<ui:menu>
+    <ui:menuTriggerLink aura:id="trigger" label="Contacts"/>
+        <ui:menuList class="actionMenu" aura:id="actionMenu" 
+                     menuCollapse="{!c.addMyClass}" menuExpand="{!c.removeMyClass}">
+            <ui:actionMenuItem aura:id="item1" label="All Contacts" 
+                               click="{!c.doSomething}"/>
+            <ui:actionMenuItem aura:id="item2" label="All Primary" click="{!c.doSomething}"/>
+         </ui:menuList>
+</ui:menu>
+</aura:component>

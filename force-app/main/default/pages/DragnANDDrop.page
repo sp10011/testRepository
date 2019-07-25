@@ -1,0 +1,176 @@
+<apex:page controller="DragnDropController" sidebar="false" showHeader="false" >
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+        <apex:slds />
+        <style>
+            .box__dragndrop,
+            .box__uploading,
+            .box__success,
+            .box__error {
+            display: none;
+            }
+            
+            .box__dragndrop {
+            display: inline;
+            }
+            
+            .box__input{
+            box-sizing: border-box;
+            width: 100%;
+            padding: 15%;
+            outline: 2px dashed black;
+            outline-offset: -10px;
+            }
+            
+            .box.is-dragover {
+            background-color: grey;
+            }
+            
+            .label{
+            font-size: 1.25em;
+            color: grey;
+            }
+            
+            .label:hover {
+            color: black;
+            cursor: pointer;
+            }
+        </style>
+        <script>
+        
+        var address;
+        var subject;
+        var dte;
+        var myDate;
+        var body;
+        var file;
+        var fileAsBlob=[];
+        var fileDropAsBlob=[];
+        var encodedata;
+        var myVar;
+        var reader;
+        var text=[]; 
+        var droppedFiles;
+        var concatedList=[];
+        var name=[];
+        
+        // jquery code for Drag’n’Drop functionality 
+        var isAdvancedUpload = function() {
+            var div = document.createElement('div');
+            return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+        }();
+        
+        var $form = $('.box');
+        
+        if (isAdvancedUpload) {
+            
+            $form.addClass('has-advanced-upload');
+            
+            droppedFiles = false;
+            
+            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            })
+            .on('dragover dragenter', function() {
+                $form.addClass('is-dragover');
+            })
+            .on('dragleave dragend drop', function() {
+                $form.removeClass('is-dragover');
+            })
+            .on('drop', function(e) {
+                droppedFiles = e.originalEvent.dataTransfer.files;
+            });
+        }
+        
+       // function to send email with attachment
+        
+        function send(){
+            address= document.getElementById("address").value;
+            subject=document.getElementById("subject").value;
+            dte=document.getElementById("date").value;
+            myDate= (dte && dte.replace(/-/g, '-'))  || '';
+            body= document.getElementById("body").value;
+            
+            file=document.getElementById("file");
+            
+          // convert drop files into blob
+            
+            for(var i=0; i< file.files.length; i++){
+                fileAsBlob.push ( new Blob([file.files[i]]));
+            }
+            
+            for(var i=0; i< droppedFiles.length; i++){
+                fileDropAsBlob.push ( new Blob([droppedFiles[i]]));
+            }
+            // merge files coming from button and drag and drop
+           
+            concatedList=fileAsBlob.concat(fileDropAsBlob)
+            
+          // convert blob to string bcause jsremoting method does not accept blob parameter so we need to change our blob to string
+            
+            for(var i=0; i< concatedList.length; i++){
+                reader = new FileReader();
+                reader.addEventListener('loadend',  (e) => {
+                    text.push(e.srcElement.result);
+                });
+                    reader.readAsText(concatedList[i]);
+                } 
+                    remote(text);
+                }
+                   // this is remoting method
+                    function remote(text){
+                    Visualforce.remoting.Manager.invokeAction( '{!$RemoteAction.DragnDropController.sendEmail}', address, subject, myDate, body, text, function(result, event){
+                    console.log('value of result is',result);
+                });
+                }
+                    
+                    </script>
+    </head>
+    <body>
+        <form>
+            <center><h2 class="slds-page-header slds-truncate slds-text-heading_medium">SEND EMAIL</h2></center>
+            <br/>
+            <br/>
+            
+            <table class="slds-theme_alert-texture slds-table_cell-buffer">
+                <tr>
+                    <th class="slds-form-element__label slds-text-heading_small slds-m-top--medium">Email Address</th>
+                    <td><input type="email" id="address" class="slds-input slds-m-top--medium" required="required" /></td >
+                </tr>
+                
+                <tr>
+                    <th class="slds-form-element__label slds-text-heading_small slds-m-top--medium">Subject</th>
+                    <td><input type="text" id="subject" class="slds-input slds-m-top--medium" required="required" /></td>
+                </tr>
+                <tr>
+                    <th class="slds-form-element__label slds-text-heading_small slds-m-top--medium">Email Body</th>
+                    <td>
+                        <textarea rows="4" cols="50" id="body" class="slds-input slds-m-top--medium" required="required"></textarea>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <th class="slds-form-element__label slds-text-heading_small slds-m-top--medium">Attachment</th>
+                    <td>
+                        <div class="box" method="post" action="" enctype="multipart/form-data">
+                            <div class="box__input" >
+                                <input class="box__file" type="file" accept=".txt" name="files[]" id="file"  multiple="multiple" style="display: none;" />
+                                <label for="file" ><strong><center>Choose a file</center></strong>
+                                    <span class="box__dragndrop" data-multiple-caption="{count} files selected"> <center>or drag it here</center></span>
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                
+            </table>
+            <br/>
+            <br/>
+            <center>
+                <input type="button" value="Send" onclick="send()" id="button" class="slds-button slds-button--neutral slds-text-heading_small" />
+            </center>
+        </form>
+    </body>
+</apex:page>

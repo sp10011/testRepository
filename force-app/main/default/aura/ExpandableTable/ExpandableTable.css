@@ -1,0 +1,7 @@
+.THIS.slds-modal__content{
+    overflow: auto !important;
+    overflow-y: auto !important;
+}
+.THIS .slds-modal__content:last-child {
+    overflow: auto !important;
+}

@@ -1,0 +1,82 @@
+<aura:component controller="AccountController_Lightning" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="Opportunity" type="List" />
+    <aura:handler event="c:PassAccountIdEvent" action="{!c.fetchOpportunity}" />
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}" />
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}" />
+    <aura:attribute name="test" type="string" />
+    <!--create a component attributs -->
+    <aura:attribute name="Spinner" type="boolean" default="false" />
+
+
+    <aura:if isTrue="{!v.Opportunity.length>0}">
+        <fieldset class="slds-box">
+            <legend style="font-size: 1.00rem">Opportunity Details</legend>
+            <lightning:button label="New Opportunity" variant="brand" class="slds-align_absolute-center" onclick="{!c.searchAccount}" />
+            <br/>
+            <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                <thead>
+                    <tr class="slds-text-heading--label">
+                        <th scope="col">
+                            <div title="Action">Action</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">Opportunity Name</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Type">Type</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Stage">Stage</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Close Date">Close Date</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Owner">Opportunity Owner</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!-- Use the Apex model and controller to fetch server side data -->
+                    <aura:iteration items="{!v.Opportunity}" var="opp">
+                        <tr>
+                            <td>
+                                <lightning:input type="checkbox-button" label="Action" name="{!opp.Id}" onchange="{!c.newPage}" />
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!opp.Name}">{!opp.Name}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!opp.Type}">{!opp.Type}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!opp.StageName}">{!opp.StageName}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!opp.CloseDate}">{!opp.CloseDate}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="{!opp.Owner.Name}">{!opp.Owner.Name}</div>
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+            <aura:if isTrue="{!v.Spinner}">
+                <lightning:spinner variant="brand" size="large" />
+            </aura:if><br/>
+            <lightning:button label="New Opportunity" variant="brand" class="slds-align_absolute-center" onclick="{!c.searchAccount}" />
+        </fieldset>
+    </aura:if>
+    <!-- FOOTER -->
+    <footer role="contentinfo" class="slds-p-around--large">
+        <!-- LAYOUT GRID -->
+        <div class="slds-grid slds-grid--align-spread">
+            <p class="slds-col">Salesforce Lightning Component</p>
+            <p class="slds-col">&copy; Sumit Pandey</p>
+        </div>
+        <!-- / LAYOUT GRID -->
+    </footer>
+    <!-- / FOOTER -->
+</aura:component>

@@ -1,0 +1,4 @@
+<aura:component >
+    <c:ContactList />
+	
+</aura:component>

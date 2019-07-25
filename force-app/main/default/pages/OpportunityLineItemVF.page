@@ -1,0 +1,32 @@
+<apex:page standardController="Opportunity"   extensions="PDFcontroller" >
+     <apex:form >
+      <apex:pageBlock >
+     <apex:pageblockSection title="Opportunity">
+       <apex:outputText value="Select opportunity"></apex:outputText>
+       <apex:selectList value="{!selval}" size="1">
+           <apex:selectOptions value="{!AllOpportunity}">
+           </apex:selectOptions> 
+           </apex:selectList>
+
+         <apex:commandButton value="ViewProducts" action="{!ShowRelatedProducts}"/>
+    </apex:pageblockSection>
+</apex:pageBlock>
+        <apex:pageBlock >
+      <apex:pageblockSection title="Products">
+
+           <apex:pageBlockTable value="{!opportunity.opportunityLineItems}" var="prd">
+
+          <apex:column value="{!prd.ServiceDate}"/>
+          <apex:column value="{!prd.Discount}"/>
+          <apex:column value="{!prd.ListPrice}"/>
+          <apex:column value="{!prd.ProductCode}"/>
+          <apex:column value="{!prd.Quantity}"/>
+          <apex:column value="{!prd.UnitPrice}"/>
+          <apex:column value="{!prd.Subtotal}"/>
+          <apex:column value="{!prd.TotalPrice}"/>
+
+        </apex:pageBlockTable>
+    </apex:pageblockSection>
+    </apex:pageBlock> 
+    </apex:form>
+   </apex:page>

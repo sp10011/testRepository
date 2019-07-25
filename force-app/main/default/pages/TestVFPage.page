@@ -1,0 +1,17 @@
+<apex:page controller="TestLCController">
+   
+        <apex:outputText value="{!vast.oid}"/><br/>
+        <apex:outputText value="{!vast.irn}"/><br/>
+        <apex:outputText value="{!vast.certId}"/><br/>
+        <apex:outputText value="{!vast.educProgType}"/><br/>
+        <apex:outputText value="{!vast.educProgVers}"/><br/>
+        <apex:outputText value="{!vast.corpStudProgHistNum}"/><br/>
+        <apex:outputText value="{!vast.chapterOid}"/><br/>
+        <apex:outputText value="{!vast.chapter}"/><br/>
+   
+    
+    
+    
+    
+
+</apex:page>

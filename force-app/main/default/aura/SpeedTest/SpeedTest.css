@@ -1,0 +1,28 @@
+.THIS{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.THIS .arcValue {
+  background-color: red;
+  border: 1px solid black;
+  display: inline-block;
+  width: 5%;
+  height: 5%;
+}
+
+.THIS .arcValueSpan { 
+  color: green;
+}
+
+.THIS .hiddenDonutArcs {
+  width: 2px;
+  height: 2px;
+  display: inline-block;
+}
+
+.THIS .donutText {
+  background-color:green;
+  color: red;
+}

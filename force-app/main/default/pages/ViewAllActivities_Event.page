@@ -1,0 +1,16 @@
+<apex:page standardController="Event" showHeader="false" standardStylesheets="false" sidebar="false">
+
+        <script>
+          function test(){
+             var a = "{!$CurrentPage.parameters.Id}"
+             window.close('/apex/ViewAllActivities_Event');
+             window.open('/apex/ViewAllActivities?Id='+a);
+             }
+		</script>
+
+ <apex:form >
+       <body onload="test();">
+  	   </body>
+ </apex:form>
+
+</apex:page>
